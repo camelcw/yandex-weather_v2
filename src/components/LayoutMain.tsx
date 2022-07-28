@@ -8,7 +8,7 @@ import { IRegion } from "../models/Region";
 interface LayoutMainProps {
   regions: IRegion[];
 }
-/** Главный Layout  */
+/** Главный Layout,  не подгружает компоненты(  */
 const LayoutMain: FC<LayoutMainProps> = ({ regions }) => {
   return (
     <Layout className="layout">
@@ -16,7 +16,12 @@ const LayoutMain: FC<LayoutMainProps> = ({ regions }) => {
       <ContentMain
         items={regions}
         renderItem={(region) => (
-          <RegionCard key={region.area} region={region} />
+          <RegionCard
+            key={region?.area}
+            value={region.value}
+            area={region.area}
+            oktmo_short={region.oktmo_short}
+          />
         )}
       />
     </Layout>

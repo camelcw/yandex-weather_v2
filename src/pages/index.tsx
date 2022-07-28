@@ -4,12 +4,21 @@ import "../../node_modules/antd/dist/antd.css";
 import axios from "axios";
 import { IRegion } from "../models/Region";
 import * as https from "https";
-/** Главная страница, данные не подгружаются( */
+import Link from "next/link";
+/** Главная страница, удивительные данные приходят) */
 const index = (regions: IRegion[]) => {
-  console.log(regions);
+  const valuesArray = Object.values(regions);
+  let regionArray: IRegion[] = [];
+  function getArray(valuesArray: any[]) {
+    console.log(Object.keys(valuesArray));
+    valuesArray.map((region) => {
+      regionArray = region;
+    });
+  }
+  getArray(valuesArray);
   return (
     <div>
-      <LayoutMain regions={Object.values(regions)} />
+      <LayoutMain regions={Object.values(regionArray)} />
     </div>
   );
 };
@@ -33,16 +42,10 @@ export default index;
 // }
 
 export async function getStaticProps(context: any) {
-  const agent = new https.Agent({
-    rejectUnauthorized: false,
-  });
   const response = await axios.get<IRegion>(
-    "https://api.geotree.ru/search.php?key=xOtdrrGA2BN1&level=1",
-    {
-      httpAgent: agent,
-    }
+    "https://api.geotree.ru/search.php?key=xOtdrrGA2BN1&level=1"
   );
-  const regions: IRegion[] = Object.values(response?.data);
+  const regions = response?.data;
   return {
     props: { regions }, // will be passed to the page component as props
   };
