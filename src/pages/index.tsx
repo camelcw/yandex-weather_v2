@@ -1,0 +1,49 @@
+import React from "react";
+import LayoutMain from "../components/LayoutMain";
+import "../../node_modules/antd/dist/antd.css";
+import axios from "axios";
+import { IRegion } from "../models/Region";
+import * as https from "https";
+/** Главная страница, данные не подгружаются( */
+const index = (regions: IRegion[]) => {
+  console.log(regions);
+  return (
+    <div>
+      <LayoutMain regions={Object.values(regions)} />
+    </div>
+  );
+};
+
+export default index;
+
+// export async function getStaticProps(context: any) {
+//   const moskow = await fetchWeather(
+//     "https://api.weather.yandex.ru/v2/forecast?lat=55.75396&lon=37.620393&extra=true"
+//   );
+//   const kazan = await fetchWeather(
+//     "https://api.weather.yandex.ru/v2/forecast?lat=55.796289&lon=49.108795"
+//   );
+//   const peter = await fetchWeather(
+//     "https://api.weather.yandex.ru/v2/forecast?lat=59.93909836&lon=30.31587601"
+//   );
+
+//   return {
+//     props: { moskow, peter, kazan }, // will be passed to the page component as props
+//   };
+// }
+
+export async function getStaticProps(context: any) {
+  const agent = new https.Agent({
+    rejectUnauthorized: false,
+  });
+  const response = await axios.get<IRegion>(
+    "https://api.geotree.ru/search.php?key=xOtdrrGA2BN1&level=1",
+    {
+      httpAgent: agent,
+    }
+  );
+  const regions: IRegion[] = Object.values(response?.data);
+  return {
+    props: { regions }, // will be passed to the page component as props
+  };
+}
