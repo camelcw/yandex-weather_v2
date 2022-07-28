@@ -8,5 +8,19 @@ interface ContentCityProps<T> {
 }
 
 export default function ContentCity<T>(props: ContentCityProps<T>) {
-  return <Content>{props.items.map(props.renderItem)}</Content>;
+  return (
+    <Content
+      style={{
+        padding: 15,
+        margin: 0,
+        minWidth: 280,
+        minHeight: 280,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <div>{props.items.map(props.renderItem)}</div>
+    </Content>
+  );
 }

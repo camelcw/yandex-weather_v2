@@ -5,12 +5,12 @@ import axios from "axios";
 import { IRegion } from "../models/Region";
 import * as https from "https";
 import Link from "next/link";
+
 /** Главная страница, удивительные данные приходят) */
 const index = (regions: IRegion[]) => {
   const valuesArray = Object.values(regions);
   let regionArray: IRegion[] = [];
   function getArray(valuesArray: any[]) {
-    console.log(Object.keys(valuesArray));
     valuesArray.map((region) => {
       regionArray = region;
     });
@@ -18,7 +18,7 @@ const index = (regions: IRegion[]) => {
   getArray(valuesArray);
   return (
     <div>
-      <LayoutMain regions={Object.values(regionArray)} />
+      <LayoutMain regions={regionArray} />
     </div>
   );
 };
