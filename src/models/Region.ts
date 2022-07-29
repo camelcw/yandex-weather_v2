@@ -1,6 +1,7 @@
+import { ICity } from "./City";
 
 export interface IRegion {
-    value: string;
-    area: number;
-    oktmo_short: string;
+    name: string;
+    id: string ;
+    cities?: ICity[];
 }

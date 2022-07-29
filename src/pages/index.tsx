@@ -1,12 +1,11 @@
 import React from "react";
-import LayoutMain from "../components/LayoutMain";
 import "../../node_modules/antd/dist/antd.css";
 import axios from "axios";
 import { IRegion } from "../models/Region";
-import * as https from "https";
-import Link from "next/link";
+import LayoutRegion from "../components/layout/LayoutRegion";
 
 /** Главная страница, удивительные данные приходят) */
+//https://api.hh.ru/areas/113
 const index = (regions: IRegion[]) => {
   const valuesArray = Object.values(regions);
   let regionArray: IRegion[] = [];
@@ -18,7 +17,7 @@ const index = (regions: IRegion[]) => {
   getArray(valuesArray);
   return (
     <div>
-      <LayoutMain regions={regionArray} />
+      <LayoutRegion regions={regionArray} />
     </div>
   );
 };
@@ -42,10 +41,11 @@ export default index;
 // }
 
 export async function getStaticProps(context: any) {
-  const response = await axios.get<IRegion>(
-    "https://api.geotree.ru/search.php?key=xOtdrrGA2BN1&level=1"
-  );
-  const regions = response?.data;
+  const response = await axios.get("https://api.hh.ru/areas/113");
+
+  console.log(response.data.areas);
+
+  const regions = response?.data.areas;
   return {
     props: { regions }, // will be passed to the page component as props
   };
