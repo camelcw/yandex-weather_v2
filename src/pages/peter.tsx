@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import HeaderCity from "../components/HeaderCity";
+import HeaderCity from "../components/layout/header/HeaderCity";
 import { IWeather } from "../models/Weather";
 /** Страница Saint-Peterburg(пока в разработке) */
 const peter = (weather: IWeather) => {
