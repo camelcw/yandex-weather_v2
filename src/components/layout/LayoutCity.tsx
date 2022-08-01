@@ -2,7 +2,7 @@ import { Layout } from "antd";
 import React, { FC } from "react";
 import { ICity } from "../../models/City";
 import CityCard from "../pages/Region/City/CityCard";
-import ContentCity from "./content/ContentCity";
+import ContentList from "./content/ContentList";
 import HeaderCity from "./header/HeaderCity";
 
 interface LayoutCityProps {
@@ -13,7 +13,7 @@ const LayoutCity: FC<LayoutCityProps> = ({ cities }) => {
   return (
     <Layout>
       <HeaderCity />
-      <ContentCity
+      <ContentList
         items={cities}
         renderItem={(cities) => (
           <CityCard id={cities.id} name={cities.name} key={cities.id} />

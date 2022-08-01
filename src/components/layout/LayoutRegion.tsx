@@ -2,8 +2,8 @@ import React, { FC } from "react";
 import { Layout } from "antd";
 import RegionCard from "../pages/Region/RegionCard";
 import { IRegion } from "../../models/Region";
-import ContentRegion from "./content/ContentRegion";
 import HeaderRegion from "./header/HeaderRegion";
+import ContentList from "./content/ContentList";
 
 interface LayoutRegionProps {
   regions: IRegion[];
@@ -22,7 +22,7 @@ const LayoutRegion: FC<LayoutRegionProps> = ({
     <Layout className="layout">
       <HeaderRegion />
       {/* <MySelect defaultValue={defaultValue} onChange={onChange} value={value} /> */}
-      <ContentRegion
+      <ContentList
         items={regions}
         renderItem={(region) => (
           <RegionCard id={region.id} key={region.id} name={region.name} />

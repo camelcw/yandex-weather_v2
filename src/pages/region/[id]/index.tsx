@@ -6,9 +6,6 @@ import LayoutCity from "../../../components/layout/LayoutCity";
 import { ICity } from "../../../models/City";
 
 const handler = (cities: ICity[]) => {
-  const { query } = useRouter();
-  console.log(cities);
-
   const valuesArray = Object.values(cities);
   let cityArray: ICity[] = [];
   function getArray(valuesArray: any[]) {

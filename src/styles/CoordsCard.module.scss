@@ -1,0 +1,19 @@
+.small_description {
+    display: flex;
+    border: 1px solid teal;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tenDay_description {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.weatherCard {
+    width: 100px;
+    height: 100px;
+}

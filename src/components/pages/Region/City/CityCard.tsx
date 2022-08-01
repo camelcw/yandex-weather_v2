@@ -7,10 +7,10 @@ import styles from "../../../../styles/CityCard.module.scss";
 /** Компонет для отображения городов на странице региона*/
 const CityCard: FC<ICity> = ({ name, id }) => {
   const router = useRouter();
-  console.log(router);
+  console.log(router.query);
   return (
     <div>
-      <Link href={`/region/${router.query.id}/${id}`}>
+      <Link href={`/region/${router.query.id}/${name}`}>
         <a>
           <h2>{name}</h2>
         </a>
