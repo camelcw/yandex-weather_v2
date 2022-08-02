@@ -1,4 +1,5 @@
-import { Card } from "antd";
+import { Button, Card, Carousel } from "antd";
+import { Swiper } from "antd-mobile";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
@@ -20,64 +21,77 @@ const CoordsCard: FC<ICoords> = ({
 }) => {
   const date = new Date();
   const router = useRouter();
+  const onChange = (currentSlide: number) => {
+    console.log(currentSlide);
+  };
   return (
-    <div>
-      <Card
-        title={`${geo_object.locality.name}, ${geo_object.province.name}`}
-        bordered={true}
-        style={{ width: 400 }}
-      >
-        <div>
-          <p>
-            Сейчас {date.getHours()}:{date.getMinutes()}. Вчера в это время +
-            {yesterday.temp}
-          </p>
-        </div>
-        <section>
-          <div>{fact.temp}</div>
-          <div>{fact.condition}</div>
-          <div>{fact.feels_like}</div>
-          <img
-            alt={fact?.icon}
-            src={` https://yastatic.net/weather/i/icons/funky/dark/${fact.icon}.svg`}
-          ></img>
-        </section>
-        <section>
-          {forecasts[0].hours.map((hour) => (
-            <div key={hour.hour_ts} className={styles.small_description}>
-              <div>В: {Number(hour.hour) + 1}</div>
-              <div>Температура: {hour.temp}</div>
+    <div className={styles.weather}>
+      <div className={styles.weather__description}>
+        <Card
+          title={`${geo_object.locality.name}, ${geo_object.province.name}`}
+          bordered={true}
+        >
+          <div>
+            <p>
+              Сейчас {date.getHours()}:{date.getMinutes()}. Вчера в это время +
+              {yesterday.temp}
+            </p>
+          </div>
+          <section className={styles.weather__shortDescription}>
+            <div className={styles.weather__shortDescription_leftSection}>
+              <div>+{fact.temp}</div>
               <img
-                alt={hour.icon}
-                src={` https://yastatic.net/weather/i/icons/funky/dark/${hour.icon}.svg`}
+                className={styles.weather__shortDescription_leftSectionIcon}
+                alt={fact?.icon}
+                src={` https://yastatic.net/weather/i/icons/funky/dark/${fact.icon}.svg`}
               ></img>
             </div>
-          ))}
-        </section>
-      </Card>
-      <Card
-        title="Прогноз погоды на 7 дней"
-        bordered={true}
-        style={{ width: 600 }}
-      >
-        <section className={styles.tenDay_description}>
+            <div className={styles.weather__shortDescription_rightSection}>
+              <div>{fact.condition}</div>
+              <div>Ощущается как +{fact.feels_like}</div>
+            </div>
+          </section>
+          <section>
+            <div className={styles.weather__carousel}>
+              <Carousel autoplay dotPosition="right" dots={false}>
+                {forecasts[0].hours.map((hour) => (
+                  <div
+                    key={hour.hour_ts}
+                    className={styles.weather__shortDescription_toDay}
+                  >
+                    <div className={styles.weather__carouselText}>
+                      <div>{Number(hour.hour) + 1}:00</div>
+                      <div>+{hour.temp}</div>
+                      <img
+                        className={styles.weather__carouselIcon}
+                        alt={hour.icon}
+                        src={` https://yastatic.net/weather/i/icons/funky/dark/${hour.icon}.svg`}
+                      ></img>
+                    </div>
+                  </div>
+                ))}
+              </Carousel>
+            </div>
+          </section>
+        </Card>
+      </div>
+      <Card title="Прогноз погоды на 7 дней" bordered={false}>
+        <section className={styles.weather__tenDay}>
           {forecasts.map((forecast) => (
             <Link
               href={`/region/${router.query.id}/${router.query.coords}/forecast`}
               key={forecast.date_ts}
             >
-              <a>
-                <Card>
-                  <div className={styles.weatherCard}>
-                    <div>{forecast.date}</div>
-                    <div>{forecast.parts.day_short.soil_temp}</div>
-                    <div>{forecast.parts.day_short.temp_min}</div>
-                    <img
-                      alt={forecast.parts.day_short.icon}
-                      src={` https://yastatic.net/weather/i/icons/funky/dark/${forecast.parts.day_short.icon}.svg`}
-                    ></img>
-                  </div>
-                </Card>
+              <a className={styles.weather__teDay_card}>
+                <div>{forecast.date}</div>
+                <img
+                  className={styles.weather__tenDay_icon}
+                  alt={forecast.parts.day_short.icon}
+                  src={` https://yastatic.net/weather/i/icons/funky/dark/${forecast.parts.day_short.icon}.svg`}
+                ></img>
+                <div>+{forecast.parts.day_short.soil_temp}</div>
+                <div>+{forecast.parts.day_short.temp_min}</div>
+                <div>{fact.condition}</div>
               </a>
             </Link>
           ))}

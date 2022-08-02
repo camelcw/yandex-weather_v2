@@ -7,7 +7,6 @@ import styles from "../../../styles/HeaderMain.module.scss";
 
 const HeaderCoords = () => {
   const router = useRouter();
-  console.log(router);
   return (
     <Header>
       <div className={styles.header}>
@@ -20,9 +19,14 @@ const HeaderCoords = () => {
         >
           Прогноз на 10 дней
         </Link>
-        <Link className={styles.header__link} href="/">
-          Главная
-        </Link>
+        <div>
+          <Button className={styles.header__btn} type="primary">
+            Добавить в избранное
+          </Button>
+          <Link className={styles.header__link} href="/">
+            Главная
+          </Link>
+        </div>
       </div>
     </Header>
   );

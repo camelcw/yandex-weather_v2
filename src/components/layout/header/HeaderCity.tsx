@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 /** Header для городов */
 const HeaderCity = () => {
   const router = useRouter();
-  console.log(router);
   return (
     <Header className={styles.header}>
       <Button onClick={() => router.back()} type="primary">

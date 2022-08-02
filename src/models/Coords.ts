@@ -6,6 +6,8 @@ interface IFact {
     icon: string,
     season: string,
     temp: number,
+    soil_temp: number,
+    temp_min: number,
 }
 
 interface IInfo {
@@ -13,17 +15,13 @@ interface IInfo {
     lon: number,
 }
 
-interface IDayShort extends IFact {
-    soil_temp: number,
-    temp_min: number,
-}
 
 interface IParts {
     day: IFact,
     evening: IFact,
     morning: IFact,
     night: IFact,
-    day_short: IDayShort,
+    day_short: IFact,
 }
 
 interface IHours {
@@ -50,8 +48,12 @@ interface IForecasts {
     week: number,
     date_ts: number,
     hours: IHours[],
-    parts: IParts
-
+    parts: IParts,
+    condition: string,
+    wind_speed: number,
+    pressure_mm: number,
+    humidity: number,
+    feels_like: number
 }
 
 interface IYesterday {

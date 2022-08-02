@@ -9,14 +9,6 @@ import LayoutCoords from "../../../../components/layout/LayoutCoords";
 export default function handler(townTest: any) {
   const { query } = useRouter();
   const valuesArray: ICoords[] = Object.values(townTest);
-  // let townObject: ICoords[] = [];
-  // function getArray(valuesArray: any[]) {
-  //   valuesArray.map((tw) => {
-  //     townObject = tw;
-  //   });
-  // }
-  // getArray(valuesArray);
-  console.log(valuesArray);
   return (
     <div>
       <LayoutCoords coords={valuesArray} />
@@ -64,7 +56,6 @@ export async function getServerSideProps(context: any) {
       },
     }
   );
-
   const townTest = responseTown.data;
 
   return {
