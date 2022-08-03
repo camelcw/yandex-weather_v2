@@ -4,10 +4,10 @@ import axios from "axios";
 import { ITown } from "../../../../../models/Town";
 import { ICoords } from "../../../../../models/Coords";
 import LayoutForecast from "../../../../../components/layout/LayoutForecast";
-
-const handler = (townTest: any) => {
+/** Страница подробный погоды */
+const index = (forecast: any) => {
   const { query } = useRouter();
-  const valuesArray: ICoords[] = Object.values(townTest);
+  const valuesArray: ICoords[] = Object.values(forecast);
 
   console.log(valuesArray);
 
@@ -18,9 +18,10 @@ const handler = (townTest: any) => {
   );
 };
 
-export default handler;
-
+export default index;
+/** Получение данных о подробной погоде в городе */
 export async function getServerSideProps(context: any) {
+  //Запрос на получение координат города
   const response = await axios.get(
     "https://api.geotree.ru/search.php?key=xOtdrrGA2BN1&level=4&limit=1",
     {
@@ -31,7 +32,7 @@ export async function getServerSideProps(context: any) {
   );
 
   const town = response.data;
-
+  // Попробуй изменить получение данных
   const valuesArray = Object.values(town);
   let townObject: ITown = {
     geo_center: {
@@ -47,8 +48,8 @@ export async function getServerSideProps(context: any) {
     });
   }
   getArray(valuesArray);
-
-  const responseTown = await axios.get(
+  //Запрос на подробную погоду по координатам
+  const responseForecast = await axios.get(
     "https://api.weather.yandex.ru/v2/forecast",
     {
       params: {
@@ -61,9 +62,9 @@ export async function getServerSideProps(context: any) {
     }
   );
 
-  const townTest = responseTown.data;
+  const forecast = responseForecast.data;
 
   return {
-    props: { townTest }, // will be passed to the page component as props
+    props: { forecast }, // will be passed to the page component as props
   };
 }

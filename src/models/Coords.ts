@@ -15,7 +15,6 @@ interface IInfo {
     lon: number,
 }
 
-
 interface IParts {
     day: IFact,
     evening: IFact,
@@ -53,7 +52,9 @@ interface IForecasts {
     wind_speed: number,
     pressure_mm: number,
     humidity: number,
-    feels_like: number
+    feels_like: number,
+    icon: string,
+    temp_avg: number,
 }
 
 interface IYesterday {

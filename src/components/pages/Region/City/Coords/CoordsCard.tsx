@@ -21,9 +21,6 @@ const CoordsCard: FC<ICoords> = ({
 }) => {
   const date = new Date();
   const router = useRouter();
-  const onChange = (currentSlide: number) => {
-    console.log(currentSlide);
-  };
   return (
     <div className={styles.weather}>
       <div className={styles.weather__description}>

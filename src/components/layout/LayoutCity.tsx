@@ -8,7 +8,7 @@ import HeaderCity from "./header/HeaderCity";
 interface LayoutCityProps {
   cities: ICity[];
 }
-
+/** Страница городов в регионе*/
 const LayoutCity: FC<LayoutCityProps> = ({ cities }) => {
   return (
     <Layout>

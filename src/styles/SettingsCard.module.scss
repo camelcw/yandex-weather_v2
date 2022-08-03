@@ -1,0 +1,21 @@
+.settings__card {
+    
+    width: 50%;
+    border: 1px solid #043461f6;
+    &:not(&:last-child) {
+        margin-bottom: 15px;
+    }
+    .settings__cardDescription {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px;
+        .settings__cardDescriptionIcon {
+            height: 40px;
+            width: 40px;
+            margin-left: 15px;
+        }
+}
+
+}
+

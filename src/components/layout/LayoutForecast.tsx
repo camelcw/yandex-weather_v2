@@ -8,7 +8,7 @@ import HeaderForecast from "./header/HeaderForecast";
 interface LayoutForecastProps {
   coords: ICoords[];
 }
-
+/** Страница подробной погоды*/
 const LayoutForecast: FC<LayoutForecastProps> = ({ coords }) => {
   return (
     <Layout>

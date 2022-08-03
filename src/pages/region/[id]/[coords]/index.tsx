@@ -1,22 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NextRouter, useRouter } from "next/router";
 import axios from "axios";
 import { ITown } from "../../../../models/Town";
 import { ICoords } from "../../../../models/Coords";
 import CoordsCard from "../../../../components/pages/Region/City/Coords/CoordsCard";
 import LayoutCoords from "../../../../components/layout/LayoutCoords";
-
-export default function handler(townTest: any) {
-  const { query } = useRouter();
-  const valuesArray: ICoords[] = Object.values(townTest);
+import { Context } from "../../../_app";
+import { Store } from "../../../../store/store";
+import { observer } from "mobx-react-lite";
+/** Получение подробный погоды в городе */
+const index = (coords: any) => {
+  const valuesArray: ICoords[] = Object.values(coords);
   return (
     <div>
       <LayoutCoords coords={valuesArray} />
     </div>
   );
-}
+};
 
+export default observer(index);
+/** Получение данных о погоде в городе по координатам*/
 export async function getServerSideProps(context: any) {
+  //Запрос на получение координат города
   const response = await axios.get(
     "https://api.geotree.ru/search.php?key=xOtdrrGA2BN1&level=4&limit=1",
     {
@@ -27,7 +32,7 @@ export async function getServerSideProps(context: any) {
   );
 
   const town = response.data;
-
+  // Попробуй изменить получение данных
   const valuesArray = Object.values(town);
   let townObject: ITown = {
     geo_center: {
@@ -43,8 +48,8 @@ export async function getServerSideProps(context: any) {
     });
   }
   getArray(valuesArray);
-
-  const responseTown = await axios.get(
+  //Запрос на подробную погоду по координатам
+  const responseCoords = await axios.get(
     "https://api.weather.yandex.ru/v2/forecast",
     {
       params: {
@@ -56,9 +61,9 @@ export async function getServerSideProps(context: any) {
       },
     }
   );
-  const townTest = responseTown.data;
+  const coords = responseCoords.data;
 
   return {
-    props: { townTest }, // will be passed to the page component as props
+    props: { coords },
   };
 }

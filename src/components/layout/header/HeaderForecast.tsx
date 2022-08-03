@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { useRouter } from "next/router";
 import styles from "../../../styles/HeaderMain.module.scss";
-
+/** Header подробной погоды*/
 const HeaderForecast = () => {
   const router = useRouter();
   return (
@@ -14,6 +14,9 @@ const HeaderForecast = () => {
           Назад
         </Button>
         <Link href="/">Главная</Link>
+        <Link className={styles.header__link} href="/settings">
+          Настройки
+        </Link>
       </div>
     </Header>
   );

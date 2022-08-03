@@ -8,11 +8,11 @@ import HeaderCoords from "./header/HeaderCoords";
 interface LayoutCoordsProps {
   coords: ICoords[];
 }
-
+/** Страница погоды города*/
 const LayoutCoords: FC<LayoutCoordsProps> = ({ coords }) => {
   return (
     <Layout>
-      <HeaderCoords></HeaderCoords>
+      <HeaderCoords town={coords}></HeaderCoords>
       <ContentList
         items={coords}
         renderItem={(coord) => (

@@ -1,11 +1,26 @@
-import { Breadcrumb, Button } from "antd";
+import { Button } from "antd";
 import { Header } from "antd/lib/layout/layout";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { FC, useContext } from "react";
+import { ICoords } from "../../../models/Coords";
+import { Context } from "../../../pages/_app";
+import { Store } from "../../../store/store";
 import styles from "../../../styles/HeaderMain.module.scss";
 
-const HeaderCoords = () => {
+interface HeaderCoordsProps {
+  town: ICoords[];
+}
+
+/** Header погоды в городе*/
+const HeaderCoords: FC<HeaderCoordsProps> = ({ town }) => {
+  const store = useContext(Context) as Store;
+
+  const setTownAndClick = (town: ICoords[]) => {
+    store.FavouriteTown.setTown(town);
+    console.log(store.FavouriteTown.town);
+  };
+
   const router = useRouter();
   return (
     <Header>
@@ -20,7 +35,11 @@ const HeaderCoords = () => {
           Прогноз на 10 дней
         </Link>
         <div>
-          <Button className={styles.header__btn} type="primary">
+          <Button
+            className={styles.header__btn}
+            type="primary"
+            onClick={() => setTownAndClick(town)}
+          >
             Добавить в избранное
           </Button>
           <Link className={styles.header__link} href="/">

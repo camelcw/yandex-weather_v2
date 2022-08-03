@@ -1,14 +1,15 @@
 import { Content } from "antd/lib/layout/layout";
 import React from "react";
 
-/** Интерфейс для контента на главной странице */
+/** Интерфейс для контента на страницах */
 interface ContentListProps<T> {
   items: T[];
   renderItem: (item: T) => React.ReactNode | React.ReactChild;
 }
-/** Контент на странице городов */
+/** Контент на странице*/
 export default function ContentList<T>(props: ContentListProps<T>) {
   return (
+    // Убери inline styles
     <Content
       style={{
         padding: 15,
