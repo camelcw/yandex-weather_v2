@@ -4,6 +4,7 @@ import axios from "axios";
 import { ITown } from "../../../../../models/Town";
 import { ICoords } from "../../../../../models/Coords";
 import LayoutForecast from "../../../../../components/layout/LayoutForecast";
+import { observer } from "mobx-react-lite";
 /** Страница подробный погоды */
 const index = (forecast: any) => {
   const { query } = useRouter();
@@ -18,7 +19,7 @@ const index = (forecast: any) => {
   );
 };
 
-export default index;
+export default observer(index);
 /** Получение данных о подробной погоде в городе */
 export async function getServerSideProps(context: any) {
   //Запрос на получение координат города

@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { ICoords } from "../../models/Coords";
 import CoordsCard from "../pages/Region/City/Coords/CoordsCard";
 import ContentList from "./content/ContentList";
-import CoordsFooter from "./footer/CoordsFooter";
+import FooterCoords from "./footer/FooterCoords";
 import HeaderCoords from "./header/HeaderCoords";
 
 interface LayoutCoordsProps {
@@ -26,7 +26,7 @@ const LayoutCoords: FC<LayoutCoordsProps> = ({ coords }) => {
           />
         )}
       />
-      <CoordsFooter />
+      <FooterCoords />
     </Layout>
   );
 };

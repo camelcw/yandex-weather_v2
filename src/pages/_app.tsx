@@ -1,15 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
 import { createContext } from "react";
-import { FavouriteTownStore } from "../store/FavouriteTownStore";
-import { ICoords } from "../models/Coords";
 import { store } from "../store/store";
+import Router from "next/router";
+import MyLoader from "../components/layout/loader/MyLoader";
+
 export const Context = createContext({});
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+  // Router.events.on("routeChangeStart", nProgress.start);
+  // Router.events.on("routeChangeError", nProgress.done);
+  // Router.events.on("hashChangeComplete", nProgress.done);
+  const [loading, setLoading] = useState<boolean>(false);
+  useEffect(() => {
+    Router.events.on("routeChangeStart", () => setLoading(true));
+    Router.events.on("routeChangeComplete", () => setLoading(false));
+    Router.events.on("routeChangeError", () => setLoading(false));
+    return () => {
+      Router.events.off("routeChangeStart", () => setLoading(true));
+      Router.events.off("routeChangeComplete", () => setLoading(false));
+      Router.events.off("routeChangeError", () => setLoading(false));
+    };
+  }, [Router.events]);
+
   return (
-    <Context.Provider value={store}>
-      <Component {...pageProps} />
-    </Context.Provider>
+    <>
+      {loading ? (
+        <MyLoader />
+      ) : (
+        <Context.Provider value={store}>
+          <Component {...pageProps} />
+        </Context.Provider>
+      )}
+    </>
   );
 }

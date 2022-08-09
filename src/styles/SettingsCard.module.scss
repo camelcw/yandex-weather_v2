@@ -1,5 +1,7 @@
 .settings__card {
-    
+    &:hover {
+        transform: scale(1.02, 1.05);
+    }
     width: 50%;
     border: 1px solid #043461f6;
     &:not(&:last-child) {
@@ -16,8 +18,5 @@
             width: 40px;
             margin-left: 15px;
         }
-        
+    }
 }
-
-}
-
