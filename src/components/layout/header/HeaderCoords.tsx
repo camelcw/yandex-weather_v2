@@ -15,7 +15,8 @@ interface HeaderCoordsProps {
 /** Header погоды в городе*/
 const HeaderCoords: FC<HeaderCoordsProps> = ({ town }) => {
   const { query } = useRouter();
-  const { setTown, setHrefs } = (useContext(Context) as Store).FavouriteTown;
+  const { setTown, setHrefs, towns } = (useContext(Context) as Store)
+    .FavouriteTown;
 
   const setTownAndClick = (town: ICoords[]) => {
     setTown(town);

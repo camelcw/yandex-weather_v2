@@ -22,7 +22,7 @@ const index = observer((regions: IRegion[]) => {
   getArray(valuesArray);
   return (
     <div>
-      <LayoutRegion regions={regionArray} />s
+      <LayoutRegion regions={regionArray} />
     </div>
   );
 });

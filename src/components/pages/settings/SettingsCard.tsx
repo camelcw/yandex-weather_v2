@@ -14,27 +14,10 @@ interface SettingsCardProps {
 
 const SettingsCard: FC<SettingsCardProps> = ({ coords }) => {
   const { hrefs } = (useContext(Context) as Store).FavouriteTown;
-
-  const favoutiteTowns = {
-    hrefs: hrefs,
-    towns: coords,
-  };
-
-  // favoutiteTowns.towns.map((town, ind) => {
-  //   console.log(ind);
-  //   return ind;
-  // });
-
-  // hrefs.map((href, ind) => console.log(ind));
-
+  console.log(coords);
   return (
     <section className={styles.settings__card}>
-      {favoutiteTowns.towns.map((town, index) => (
-        <Link href={favoutiteTowns.hrefs[index]} key={town.now_dt}>
-          <a>{town.geo_object.locality.name}</a>
-        </Link>
-      ))}
-      {/* {coords.map((coord, index) => (
+      {coords.map((coord, index) => (
         <div key={coord.now_dt}>
           <Link href={hrefs[index]}>
             <a className={styles.settings__cardDescription}>
@@ -48,7 +31,7 @@ const SettingsCard: FC<SettingsCardProps> = ({ coords }) => {
             </a>
           </Link>
         </div>
-      ))} */}
+      ))}
     </section>
   );
 };

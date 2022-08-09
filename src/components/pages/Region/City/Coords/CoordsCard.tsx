@@ -1,5 +1,4 @@
-import { Button, Card, Carousel } from "antd";
-import { Swiper } from "antd-mobile";
+import { Card, Carousel } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC, useContext } from "react";
@@ -10,17 +9,10 @@ import styles from "../../../../../styles/CoordsCard.module.scss";
 import theme from "../../../../../styles/Theme.module.scss";
 import moment from "moment";
 
-interface CoordsCardProps {
-  town: ICoords;
-}
-
 const CoordsCard: FC<ICoords> = ({
   fact,
   forecasts,
-  parts,
   yesterday,
-  info,
-  now_dt,
   geo_object,
 }) => {
   const date = new Date();

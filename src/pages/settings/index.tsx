@@ -10,12 +10,12 @@ import { Store } from "../../store/store";
 import { Context } from "../_app";
 /** Страница настроек */
 const index = observer(() => {
-  const { town, clearTowns, clearAll } = (useContext(Context) as Store)
+  const { towns, clearTowns, clearAll } = (useContext(Context) as Store)
     .FavouriteTown;
   const { Toggle, active } = (useContext(Context) as Store).Theme;
   return (
     <div>
-      <LayoutSettings coords={town} />
+      <LayoutSettings coords={towns} />
       <Button
         style={{ marginRight: 15 }}
         type={active ? "default" : "primary"}
