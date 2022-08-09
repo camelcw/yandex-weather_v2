@@ -1,16 +1,19 @@
+import { Button } from "antd";
 import { Header } from "antd/lib/layout/layout";
 import Link from "next/link";
 import React from "react";
-import { IRegion } from "../../../models/Region";
+import { useRouter } from "next/router";
 import styles from "../../../styles/HeaderMain.module.scss";
-/** Header для регионв */
-const HeaderRegion = () => {
+/** Header подробной погоды*/
+const HeaderForecast = () => {
+  const router = useRouter();
   return (
     <Header>
       <div className={styles.header}>
-        <Link className={styles.header__link} href="/">
-          Погода в России
-        </Link>
+        <Button onClick={() => router.back()} type="primary">
+          Назад
+        </Button>
+        <Link href="/">Главная</Link>
         <Link className={styles.header__link} href="/settings">
           Настройки
         </Link>
@@ -19,4 +22,4 @@ const HeaderRegion = () => {
   );
 };
 
-export default HeaderRegion;
+export default HeaderForecast;

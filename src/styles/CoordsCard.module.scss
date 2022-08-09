@@ -1,0 +1,89 @@
+.weather {
+    height: 100%;
+    font-style: initial;
+    font-size: 16px;
+    .weather__tenDay {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+        .weather__teDay_card {
+            &:hover {
+                transform: scale(1.1,1.1);
+            }
+            color: black;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100px;
+            height: 200px;
+            border: 1px solid #f0f0f0;
+            &:not(&:last-child) {
+                margin-right: 15px;
+            }
+            .weather__tenDay_icon {
+                height: 48px;
+                width: 48px;
+            }
+        }
+
+    }
+
+}
+
+.weather__shortDescription {
+    display: flex;
+    align-items: center;
+
+}
+
+.weather__shortDescription_leftSection {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    font-size: 42px;
+    .weather__shortDescription_leftSectionIcon {
+        height: 48px;
+        width: 48px;
+        margin-right: 20px;
+    }
+}
+
+.weather__shortDescription_rightSection {
+    font-size: 15px;
+}
+
+.weather__shortDescription_toDay {
+    display: flex;
+    border: 1px solid #f0f0f0;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.weather__carousel {
+    height: 100px;
+    width: 300px;
+    .weather__carouselText {
+        font-size: 24px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        .weather__carouselIcon {
+            height: 48px;
+            width: 48px;
+        }
+    }
+}
+
+.weather__description {
+    margin-bottom: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+

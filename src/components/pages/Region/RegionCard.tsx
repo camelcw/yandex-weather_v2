@@ -1,3 +1,4 @@
+import { Card } from "antd";
 import Link from "next/link";
 import React, { FC, ReactNode } from "react";
 import { IRegion } from "../../../models/Region";
@@ -9,11 +10,16 @@ interface RegionCardProps {
 /** Карта для отображения регионов на главной странице */
 const RegionCard: FC<IRegion> = ({ name, id }) => {
   return (
-    <div>
+    <Card.Grid
+      style={{
+        width: 400,
+        marginBottom: 15,
+      }}
+    >
       <Link href={`/region/${id}`} key={id}>
         <a className={styles.content__link}>{name}</a>
       </Link>
-    </div>
+    </Card.Grid>
   );
 };
 

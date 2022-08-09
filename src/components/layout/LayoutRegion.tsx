@@ -1,34 +1,45 @@
-import React, { FC } from "react";
-import { Layout } from "antd";
+import React, { FC, useContext } from "react";
+import { Input, Layout } from "antd";
 import RegionCard from "../pages/Region/RegionCard";
 import { IRegion } from "../../models/Region";
-import ContentRegion from "./content/ContentRegion";
 import HeaderRegion from "./header/HeaderRegion";
+import ContentList from "./content/ContentList";
+import styles from "../../styles/Theme.module.scss";
+import { Context } from "../../pages/_app";
+import { Store } from "../../store/store";
+
+import { useState } from "react";
 
 interface LayoutRegionProps {
   regions: IRegion[];
-  defaultValue?: string;
-  onChange?: (event: any) => void;
-  value?: string;
 }
-/** Главный Layout,  не подгружает компоненты(  */
-const LayoutRegion: FC<LayoutRegionProps> = ({
-  regions,
-  defaultValue,
-  onChange,
-  value,
-}) => {
+/** Главный Layout*/
+const LayoutRegion: FC<LayoutRegionProps> = ({ regions }) => {
+  const { Toggle, active } = (useContext(Context) as Store).Theme;
+
+  const [searchFiled, setSearchField] = useState<string>("");
+
+  const filteredRegions: IRegion[] = regions.filter((region) =>
+    region.name.toLowerCase().includes(searchFiled.toLowerCase())
+  );
+
+  const handleChange = (event: any) => {
+    setSearchField(event.target.value);
+  };
+
   return (
-    <Layout className="layout">
-      <HeaderRegion />
-      {/* <MySelect defaultValue={defaultValue} onChange={onChange} value={value} /> */}
-      <ContentRegion
-        items={regions}
-        renderItem={(region) => (
-          <RegionCard id={region.id} key={region.id} name={region.name} />
-        )}
-      />
-    </Layout>
+    <div className={active ? styles.lightTheme : styles.darkTheme}>
+      <Layout className="layout">
+        <HeaderRegion />
+        <Input placeholder="Поиск..." onChange={handleChange} />
+        <ContentList
+          items={filteredRegions}
+          renderItem={(region) => (
+            <RegionCard id={region.id} key={region.id} name={region.name} />
+          )}
+        />
+      </Layout>
+    </div>
   );
 };
 
