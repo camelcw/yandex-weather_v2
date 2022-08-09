@@ -1,15 +1,23 @@
 import React from "react";
-import LayoutMain from "../components/LayoutMain";
 import "../../node_modules/antd/dist/antd.css";
 import axios from "axios";
 import { IRegion } from "../models/Region";
-import * as https from "https";
-/** Главная страница, данные не подгружаются( */
+import LayoutRegion from "../components/layout/LayoutRegion";
+
+/** Главная страница, удивительные данные приходят) */
+//https://api.hh.ru/areas/113
 const index = (regions: IRegion[]) => {
-  console.log(regions);
+  const valuesArray = Object.values(regions);
+  let regionArray: IRegion[] = [];
+  function getArray(valuesArray: any[]) {
+    valuesArray.map((region) => {
+      regionArray = region;
+    });
+  }
+  getArray(valuesArray);
   return (
     <div>
-      <LayoutMain regions={Object.values(regions)} />
+      <LayoutRegion regions={regionArray} />
     </div>
   );
 };
@@ -33,16 +41,11 @@ export default index;
 // }
 
 export async function getStaticProps(context: any) {
-  const agent = new https.Agent({
-    rejectUnauthorized: false,
-  });
-  const response = await axios.get<IRegion>(
-    "https://api.geotree.ru/search.php?key=xOtdrrGA2BN1&level=1",
-    {
-      httpAgent: agent,
-    }
-  );
-  const regions: IRegion[] = Object.values(response?.data);
+  const response = await axios.get("https://api.hh.ru/areas/113");
+
+  console.log(response.data.areas);
+
+  const regions = response?.data.areas;
   return {
     props: { regions }, // will be passed to the page component as props
   };
