@@ -86,3 +86,11 @@ export interface ICoords {
     geo_object: IGeo,
 
 }
+
+export interface ICoord{
+    coords: ICoords,
+}
+
+export interface IForecast {
+    forecast: ICoords
+}

@@ -1,26 +1,25 @@
 import { Button } from "antd";
 import { Header } from "antd/lib/layout/layout";
+import { observer } from "mobx-react-lite";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC, useContext } from "react";
-import { ICoords } from "../../../models/Coords";
+import { ICoord, ICoords } from "../../../models/Coords";
 import { Context } from "../../../pages/_app";
 import { Store } from "../../../store/store";
 import styles from "../../../styles/HeaderMain.module.scss";
 
 interface HeaderCoordsProps {
-  town: ICoords[];
+  town: ICoord[];
+  tw: ICoord;
 }
 
 /** Header погоды в городе*/
-const HeaderCoords: FC<HeaderCoordsProps> = ({ town }) => {
+const HeaderCoords: FC<HeaderCoordsProps> = ({ town, tw }) => {
   const { query } = useRouter();
-  const { setTown, setHrefs, towns } = (useContext(Context) as Store)
-    .FavouriteTown;
-
-  const setTownAndClick = (town: ICoords[]) => {
-    setTown(town);
-    setHrefs(`/region/${query.id}/${query.coords}`);
+  const { uniqTows } = (useContext(Context) as Store).FavouriteTown;
+  const setFavouriteTown = (town: ICoord) => {
+    uniqTows(town, `/region/${query.id}/${query.coords}`);
   };
 
   const router = useRouter();
@@ -40,7 +39,7 @@ const HeaderCoords: FC<HeaderCoordsProps> = ({ town }) => {
           <Button
             className={styles.header__btn}
             type="primary"
-            onClick={() => setTownAndClick(town)}
+            onClick={() => setFavouriteTown(tw)}
           >
             Добавить в избранное
           </Button>

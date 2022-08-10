@@ -2,20 +2,23 @@ import React, { useContext } from "react";
 import { NextRouter, useRouter } from "next/router";
 import axios from "axios";
 import { ITown } from "../../../../models/Town";
-import { ICoords } from "../../../../models/Coords";
+import { ICoord, ICoords } from "../../../../models/Coords";
 import CoordsCard from "../../../../components/pages/Region/City/Coords/CoordsCard";
 import LayoutCoords from "../../../../components/layout/LayoutCoords";
 import { Context } from "../../../_app";
 import { Store } from "../../../../store/store";
 import { observer } from "mobx-react-lite";
 /** Получение подробный погоды в городе */
-const index = (coords: any) => {
+const index = (coord: ICoord) => {
   const { query } = useRouter();
-  console.log(query);
-  const valuesArray: ICoords[] = Object.values(coords);
+
+  const { towns } = (useContext(Context) as Store).FavouriteTown;
+
+  // const valuesArray: ICoord[] = Object.values(coords);
+  console.log(towns);
   return (
     <div>
-      <LayoutCoords coords={valuesArray} />
+      <LayoutCoords coord={coord} coords={towns} />
     </div>
   );
 };

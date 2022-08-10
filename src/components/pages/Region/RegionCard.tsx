@@ -1,14 +1,14 @@
 import { Card } from "antd";
 import Link from "next/link";
 import React, { FC, ReactNode } from "react";
-import { IRegion } from "../../../models/Region";
+import { IRegion, Regions } from "../../../models/Region";
 import styles from "../../../styles/RegionCard.module.scss";
 
 interface RegionCardProps {
-  region: IRegion;
+  region: Regions;
 }
 /** Карта для отображения регионов на главной странице */
-const RegionCard: FC<IRegion> = ({ name, id }) => {
+const RegionCard: FC<Regions> = ({ name, id }) => {
   return (
     <Card.Grid
       style={{

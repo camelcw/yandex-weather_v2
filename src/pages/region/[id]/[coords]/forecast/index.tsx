@@ -2,19 +2,14 @@ import React from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { ITown } from "../../../../../models/Town";
-import { ICoords } from "../../../../../models/Coords";
+import { ICoord, ICoords, IForecast } from "../../../../../models/Coords";
 import LayoutForecast from "../../../../../components/layout/LayoutForecast";
 import { observer } from "mobx-react-lite";
 /** Страница подробный погоды */
-const index = (forecast: any) => {
-  const { query } = useRouter();
-  const valuesArray: ICoords[] = Object.values(forecast);
-
-  console.log(valuesArray);
-
+const index = (forecast: IForecast) => {
   return (
     <div>
-      <LayoutForecast coords={valuesArray} />
+      <LayoutForecast forecast={forecast} />
     </div>
   );
 };
