@@ -1,31 +1,29 @@
 import { Layout } from "antd";
 import React, { FC } from "react";
-import { ICoords } from "../../models/Coords";
+import { ICoord } from "../../models/Coords";
 import CoordsCard from "../pages/Region/City/Coords/CoordsCard";
-import ContentList from "./content/ContentList";
 import FooterCoords from "./footer/FooterCoords";
 import HeaderCoords from "./header/HeaderCoords";
+import ContentPage from "./content/ContentPage";
 
 interface LayoutCoordsProps {
-  coords: ICoords[];
+  coords: ICoord[];
+  coord: ICoord;
 }
 /** Страница погоды города*/
-const LayoutCoords: FC<LayoutCoordsProps> = ({ coords }) => {
+const LayoutCoords: FC<LayoutCoordsProps> = ({ coords, coord }) => {
   return (
     <Layout>
-      <HeaderCoords town={coords}></HeaderCoords>
-      <ContentList
-        items={coords}
-        renderItem={(coord) => (
-          <CoordsCard
-            key={coord.geo_object.locality.id}
-            forecasts={coord.forecasts}
-            yesterday={coord.yesterday}
-            geo_object={coord.geo_object}
-            fact={coord.fact}
-          />
-        )}
-      />
+      <HeaderCoords tw={coord} town={coords}></HeaderCoords>
+      <ContentPage>
+        <CoordsCard
+          key={coord.coords.geo_object.locality.id}
+          forecasts={coord.coords.forecasts}
+          yesterday={coord.coords.yesterday}
+          geo_object={coord.coords.geo_object}
+          fact={coord.coords.fact}
+        />
+      </ContentPage>
       <FooterCoords />
     </Layout>
   );

@@ -6,13 +6,13 @@ import ContentList from "./content/ContentList";
 import HeaderCity from "./header/HeaderCity";
 
 interface LayoutCityProps {
-  cities: ICity[];
+  cities: ICity;
 }
 /** Страница городов в регионе*/
 const LayoutCity: FC<LayoutCityProps> = ({ cities }) => {
   const [searchFiled, setSearchField] = useState<string>("");
 
-  const filteredCities: ICity[] = cities.filter((city) =>
+  const filteredCities = cities.cities.filter((city) =>
     city.name.toLowerCase().includes(searchFiled.toLowerCase())
   );
 

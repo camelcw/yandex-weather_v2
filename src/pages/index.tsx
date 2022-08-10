@@ -10,19 +10,10 @@ import styles from "../styles/Theme.module.scss";
 import { observer } from "mobx-react-lite";
 
 /** Главная страница */
-const index = observer((regions: IRegion[]) => {
-  //Попробуй изменить получение данных
-  const valuesArray = Object.values(regions);
-  let regionArray: IRegion[] = [];
-  function getArray(valuesArray: any[]) {
-    valuesArray.map((region) => {
-      regionArray = region;
-    });
-  }
-  getArray(valuesArray);
+const index = observer((region: IRegion) => {
   return (
     <div>
-      <LayoutRegion regions={regionArray} />
+      <LayoutRegion region={region} />
     </div>
   );
 });

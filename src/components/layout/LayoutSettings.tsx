@@ -1,22 +1,23 @@
 import { Button, Layout } from "antd";
 import { observer } from "mobx-react-lite";
 import React, { FC, useContext } from "react";
-import { ICoords } from "../../models/Coords";
+import { ICoord, ICoords } from "../../models/Coords";
 import { Context } from "../../pages/_app";
 import { Store } from "../../store/store";
 import SettingsCard from "../pages/settings/SettingsCard";
-import SettingsList from "../pages/settings/SettingsList";
+
 import HeaderSettings from "./header/HeaderSettings";
 import theme from "../../styles/Theme.module.scss";
 import styles from "../../styles/LayoutSettings.module.scss";
 import { arch } from "os";
+import Link from "next/link";
 
 interface LayoutSettingsProps {
-  coords: Array<ICoords>[];
+  coords: ICoord[];
 }
 
 const LayoutSettings: FC<LayoutSettingsProps> = ({ coords }) => {
-  const { clearTowns, setTowns } = (useContext(Context) as Store).FavouriteTown;
+  const { clearTowns, hrefs } = (useContext(Context) as Store).FavouriteTown;
   const { active } = (useContext(Context) as Store).Theme;
 
   return (
@@ -27,7 +28,7 @@ const LayoutSettings: FC<LayoutSettingsProps> = ({ coords }) => {
 
         {coords.map((coord, index) => (
           <div key={index} className={styles.layout}>
-            <SettingsCard key={index} coords={coord} />
+            <SettingsCard index={index} town={coord} />
             <Button
               type={active ? "primary" : "default"}
               onClick={() => clearTowns(coord)}

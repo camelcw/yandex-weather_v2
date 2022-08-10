@@ -1,30 +1,29 @@
 import { Layout } from "antd";
 import React, { FC } from "react";
-import { ICoords } from "../../models/Coords";
+import { ICoord, ICoords, IForecast } from "../../models/Coords";
 import ForecastCard from "../pages/Region/City/Coords/Forecast/ForecastCard";
 import ContentList from "./content/ContentList";
+import ContentPage from "./content/ContentPage";
 import HeaderForecast from "./header/HeaderForecast";
 
 interface LayoutForecastProps {
-  coords: ICoords[];
+  forecast: IForecast;
 }
 /** Страница подробной погоды*/
-const LayoutForecast: FC<LayoutForecastProps> = ({ coords }) => {
+const LayoutForecast: FC<LayoutForecastProps> = ({ forecast }) => {
+  console.log(forecast.forecast.now_dt);
   return (
     <Layout>
       <HeaderForecast />
-      <ContentList
-        items={coords}
-        renderItem={(coord) => (
-          <ForecastCard
-            key={coord.geo_object.locality.id}
-            forecasts={coord.forecasts}
-            yesterday={coord.yesterday}
-            geo_object={coord.geo_object}
-            fact={coord.fact}
-          />
-        )}
-      />
+      <ContentPage>
+        <ForecastCard
+          key={forecast.forecast.geo_object.locality.id}
+          forecasts={forecast.forecast.forecasts}
+          yesterday={forecast.forecast.yesterday}
+          geo_object={forecast.forecast.geo_object}
+          fact={forecast.forecast.fact}
+        />
+      </ContentPage>
     </Layout>
   );
 };

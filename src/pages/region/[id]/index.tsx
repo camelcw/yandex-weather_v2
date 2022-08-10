@@ -11,22 +11,10 @@ import styles from "../../../styles/Theme.module.scss";
 import { observer } from "mobx-react-lite";
 
 /** Страница города */
-const index = observer((cities: ICity[]) => {
-  const { active } = (useContext(Context) as Store).Theme;
-  console.log(active);
-  //Попробуй изменить получение данных
-  const valuesArray = Object.values(cities);
-  let cityArray: ICity[] = [];
-  function getArray(valuesArray: any[]) {
-    valuesArray.map((region) => {
-      cityArray = region;
-    });
-  }
-  getArray(valuesArray);
-
+const index = observer((cities: ICity) => {
   return (
     <div>
-      <LayoutCity cities={cityArray} />
+      <LayoutCity cities={cities} />
     </div>
   );
 });

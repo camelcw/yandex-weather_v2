@@ -11,16 +11,16 @@ import { Store } from "../../store/store";
 import { useState } from "react";
 
 interface LayoutRegionProps {
-  regions: IRegion[];
+  region: IRegion;
 }
 /** Главный Layout*/
-const LayoutRegion: FC<LayoutRegionProps> = ({ regions }) => {
-  const { Toggle, active } = (useContext(Context) as Store).Theme;
+const LayoutRegion: FC<LayoutRegionProps> = ({ region }) => {
+  const { active } = (useContext(Context) as Store).Theme;
 
   const [searchFiled, setSearchField] = useState<string>("");
 
-  const filteredRegions: IRegion[] = regions.filter((region) =>
-    region.name.toLowerCase().includes(searchFiled.toLowerCase())
+  const filteredRegions = region.regions.filter((reg) =>
+    reg.name.toLowerCase().includes(searchFiled.toLowerCase())
   );
 
   const handleChange = (event: any) => {

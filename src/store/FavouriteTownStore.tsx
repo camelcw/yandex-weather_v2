@@ -1,10 +1,9 @@
-import { throws } from "assert";
 import { makeAutoObservable } from "mobx";
 import { UrlObject } from "url";
-import { ICoords } from "../models/Coords";
+import { ICoord } from "../models/Coords";
 
 export class FavouriteTownStore {
-  towns: Array<ICoords>[];
+  towns: ICoord[];
   hrefs: any[];
   constructor() {
     this.hrefs = [];
@@ -13,38 +12,49 @@ export class FavouriteTownStore {
     makeAutoObservable(this);
   }
 
-  setTown = (town: ICoords[]) => {
+  setTown = (town: ICoord) => {
     this.towns.push(town);
-
     alert(`Ты добавил в избранные`);
   };
 
-  setTowns(towns: Array<ICoords>[]) {
-    this.towns = towns;
-  }
+  uniqTows = (town: ICoord, href: string | UrlObject) => {
+    let counter = 0;
+    if (this.towns.length > 0) {
+      this.towns.filter((t) => {
+        if (
+          t.coords.geo_object.locality.name ===
+          town.coords.geo_object.locality.name
+        ) {
+          console.log("check");
+          counter++;
+        }
+      });
+    }
+    if (counter == 0) {
+      this.setTown(town);
+      this.setHrefs(href);
+    } else {
+      alert("Уже добавлено!");
+      counter = 0;
+    }
+  };
 
-  // UniqTowns = (townss: Array<ICoords>[]) => {
-  //   const uniqTowns = this.towns
-  //     .filter((town) => townss.indexOf(town) < 0)
-  //     .concat(townss.filter((ts) => this.towns.indexOf(ts) < 0));
-  //   console.log(uniqTowns);
-  // };
+  setTowns = (towns: ICoord[]) => {
+    this.towns = towns;
+  };
 
   setHrefs = (href: string | UrlObject) => {
     this.hrefs.push(href);
   };
 
-  clearTowns = (coord: ICoords[]) => {
+  clearTowns = (coord: ICoord) => {
     const clearTown = this.towns?.filter((c) => c !== coord);
     this.setTowns(clearTown);
   };
 
   clearAll = () => {
     this.towns = [];
+    this.hrefs = [];
     alert(`Clear all`);
   };
-
-  get getTown() {
-    return this.towns;
-  }
 }
