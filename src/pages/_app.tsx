@@ -4,13 +4,10 @@ import { createContext } from "react";
 import { store } from "../store/store";
 import Router from "next/router";
 import MyLoader from "../components/layout/loader/MyLoader";
-
+/** Контекст приложения */
 export const Context = createContext({});
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  // Router.events.on("routeChangeStart", nProgress.start);
-  // Router.events.on("routeChangeError", nProgress.done);
-  // Router.events.on("hashChangeComplete", nProgress.done);
   const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     Router.events.on("routeChangeStart", () => setLoading(true));
