@@ -31,8 +31,8 @@ export class FavouriteTownStore {
       });
     }
     if (counter == 0) {
-      this.setTown(town);
       this.setHrefs(href);
+      this.setTown(town);
     } else {
       alert("Уже добавлено!");
       counter = 0;
