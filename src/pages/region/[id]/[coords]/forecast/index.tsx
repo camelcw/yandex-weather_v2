@@ -1,15 +1,14 @@
 import React from "react";
-import { useRouter } from "next/router";
 import axios from "axios";
 import { ITown } from "../../../../../models/Town";
-import { ICoord, ICoords, IForecast } from "../../../../../models/Coords";
-import LayoutForecast from "../../../../../components/layout/LayoutForecast";
+import { IForecast } from "../../../../../models/Coords";
 import { observer } from "mobx-react-lite";
+import ForecastLayout from "../../../../../components/layout/ForecastLayout";
 /** Страница подробный погоды */
 const index = (forecast: IForecast) => {
   return (
     <div>
-      <LayoutForecast forecast={forecast} />
+      <ForecastLayout forecast={forecast} />
     </div>
   );
 };
@@ -61,6 +60,6 @@ export async function getServerSideProps(context: any) {
   const forecast = responseForecast.data;
 
   return {
-    props: { forecast }, // will be passed to the page component as props
+    props: { forecast },
   };
 }

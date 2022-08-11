@@ -1,20 +1,14 @@
-import React, { useContext } from "react";
-import { useRouter } from "next/router";
+import React from "react";
 import axios from "axios";
-import { IRegion } from "../../../models/Region";
-import LayoutCity from "../../../components/layout/LayoutCity";
 import { ICity } from "../../../models/City";
-import { Context } from "../../_app";
-import { Store } from "../../../store/store";
-import { Button } from "antd";
-import styles from "../../../styles/Theme.module.scss";
 import { observer } from "mobx-react-lite";
+import CityLayout from "../../../components/layout/CityLayout";
 
 /** Страница города */
 const index = observer((cities: ICity) => {
   return (
     <div>
-      <LayoutCity cities={cities} />
+      <CityLayout cities={cities} />
     </div>
   );
 });

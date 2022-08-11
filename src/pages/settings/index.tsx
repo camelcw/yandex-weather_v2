@@ -1,11 +1,7 @@
 import { Button } from "antd";
-import axios from "axios";
 import { observer } from "mobx-react-lite";
-import { useRouter } from "next/router";
 import React, { useContext } from "react";
-import LayoutSettings from "../../components/layout/LayoutSettings";
-import { ICoords } from "../../models/Coords";
-import { ITown } from "../../models/Town";
+import SettingsLayout from "../../components/layout/SettingsLayout";
 import { Store } from "../../store/store";
 import { Context } from "../_app";
 /** Страница настроек */
@@ -16,7 +12,7 @@ const index = observer(() => {
   const { Toggle, active } = (useContext(Context) as Store).Theme;
   return (
     <div>
-      <LayoutSettings coords={towns} />
+      <SettingsLayout coords={towns} />
       <Button
         style={{ marginRight: 15 }}
         type={active ? "default" : "primary"}

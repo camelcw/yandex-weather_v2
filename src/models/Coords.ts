@@ -1,3 +1,4 @@
+/** Интерфейс для фактов */
 interface IFact {
     cloudness: number,
     condition: string,
@@ -9,12 +10,12 @@ interface IFact {
     soil_temp: number,
     temp_min: number,
 }
-
+/** Интерфейс для информации о широте и долготе */
 interface IInfo {
     lat: number,
     lon: number,
 }
-
+/** Интерфейс для времени суток*/
 interface IParts {
     day: IFact,
     evening: IFact,
@@ -22,7 +23,7 @@ interface IParts {
     night: IFact,
     day_short: IFact,
 }
-
+/** Интерфейс для погоды по часам*/
 interface IHours {
     hour_ts: number,
     cloudness: number,
@@ -36,7 +37,7 @@ interface IHours {
     wind_gust: number,
     wind_speed: number,
 }
-
+/** Интерфейс для подробной погоды*/
 interface IForecasts {
     date: string,
     moon_code: number,
@@ -56,26 +57,26 @@ interface IForecasts {
     icon: string,
     temp_avg: number,
 }
-
+/** Интерфейс вчерашней погоды*/
 interface IYesterday {
     temp: number
 }
-
+/** Интерфейс для города*/
 interface ILocality {
     id: number,
     name: string,
 }
-
+/** Интерфейс для региона*/
 interface IProvince {
     id: number,
     name: string,
 }
-
+/** Интерфейс для геолокации*/
 interface IGeo {
     locality: ILocality,
     province: IProvince,
 }
-
+/** Интерфейс для погоды в городе*/
 export interface ICoords {
     fact: IFact,
     forecasts: IForecasts[],
@@ -86,11 +87,11 @@ export interface ICoords {
     geo_object: IGeo,
 
 }
-
+/** Интерфейс для погоды в городах*/
 export interface ICoord{
     coords: ICoords,
 }
-
+/** Интерфейс для подробной погоды*/
 export interface IForecast {
     forecast: ICoords
 }

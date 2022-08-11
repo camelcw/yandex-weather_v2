@@ -1,19 +1,15 @@
-import React, { memo, useContext, useMemo, useState } from "react";
+import React from "react";
 import "../../node_modules/antd/dist/antd.css";
 import axios from "axios";
 import { IRegion } from "../models/Region";
-import LayoutRegion from "../components/layout/LayoutRegion";
-import { Context } from "./_app";
-import { Store } from "../store/store";
-import { Button, Input, Switch } from "antd";
-import styles from "../styles/Theme.module.scss";
 import { observer } from "mobx-react-lite";
+import RegionLayout from "../components/layout/RegionLayout";
 
 /** Главная страница */
 const index = observer((region: IRegion) => {
   return (
     <div>
-      <LayoutRegion region={region} />
+      <RegionLayout region={region} />
     </div>
   );
 });

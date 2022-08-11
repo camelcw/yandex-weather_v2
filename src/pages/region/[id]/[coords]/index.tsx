@@ -1,24 +1,18 @@
 import React, { useContext } from "react";
-import { NextRouter, useRouter } from "next/router";
 import axios from "axios";
 import { ITown } from "../../../../models/Town";
-import { ICoord, ICoords } from "../../../../models/Coords";
-import CoordsCard from "../../../../components/pages/Region/City/Coords/CoordsCard";
-import LayoutCoords from "../../../../components/layout/LayoutCoords";
+import { ICoord } from "../../../../models/Coords";
 import { Context } from "../../../_app";
 import { Store } from "../../../../store/store";
 import { observer } from "mobx-react-lite";
+import CoordsLayout from "../../../../components/layout/CoordsLayout";
+
 /** Получение подробный погоды в городе */
 const index = (coord: ICoord) => {
-  const { query } = useRouter();
-
   const { towns } = (useContext(Context) as Store).FavouriteTown;
-
-  // const valuesArray: ICoord[] = Object.values(coords);
-  console.log(towns);
   return (
     <div>
-      <LayoutCoords coord={coord} coords={towns} />
+      <CoordsLayout coord={coord} coords={towns} />
     </div>
   );
 };
@@ -35,7 +29,6 @@ export async function getServerSideProps(context: any) {
       },
     }
   );
-
   const town = response.data;
   // Попробуй изменить получение данных
   const valuesArray = Object.values(town);
