@@ -1,30 +1,14 @@
-import { Button } from "antd";
-import { observer } from "mobx-react-lite";
-import React, { useContext } from "react";
-import SettingsLayout from "../../components/layout/SettingsLayout";
-import { Store } from "../../store/store";
-import { Context } from "../_app";
+import { observer } from 'mobx-react-lite';
+import React from 'react';
+import SettingsLayout from '../../components/layout/SettingsLayout';
+
 /** Страница настроек */
-const index = observer(() => {
-  const { towns, clearAll, hrefs } = (useContext(Context) as Store)
-    .FavouriteTown;
-  console.log(hrefs);
-  const { Toggle, active } = (useContext(Context) as Store).Theme;
+const index = () => {
   return (
     <div>
-      <SettingsLayout coords={towns} />
-      <Button
-        style={{ marginRight: 15 }}
-        type={active ? "default" : "primary"}
-        onClick={clearAll}
-      >
-        Delete
-      </Button>
-      <Button type={active ? "default" : "primary"} onClick={Toggle}>
-        Theme
-      </Button>
+      <SettingsLayout />
     </div>
   );
-});
+};
 
-export default index;
+export default observer(index);

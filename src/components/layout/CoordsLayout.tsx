@@ -7,26 +7,21 @@ import { ICoord } from '../../models/Coords';
 import { Context } from '../../pages/_app';
 import { Store } from '../../store/store';
 import CoordsCard from '../pages/Region/City/Coords/CoordsCard';
-import CoordsAndForecastContent from './content/CoordsAndForecastContent';
 import MainContent from './content/MainContent';
-import CoordsFooter from './footer/CoordsFooter';
-import CoordsHeader from './header/CoordsHeader';
 import MainHeader from './header/MainHeader';
-import {
-  StarOutlined,
-  SettingOutlined,
-  BarsOutlined,
-  UnorderedListOutlined,
-} from '@ant-design/icons';
+import { StarOutlined, SettingOutlined, AppstoreAddOutlined } from '@ant-design/icons';
+import theme from '../../styles/Theme.module.scss';
+import styles from '../../styles/Content.module.scss';
+import MainFooter from './footer/MainFooter';
 /** Интерфейс для  CoordsLayout*/
 interface CoordsLayoutProps {
-  coords: ICoord[];
   coord: ICoord;
 }
 /** Страница погоды города*/
-const CoordsLayout: FC<CoordsLayoutProps> = ({ coords, coord }) => {
+const CoordsLayout: FC<CoordsLayoutProps> = ({ coord }) => {
   const { query } = useRouter();
   const [collapsed, setCollapsed] = useState(false);
+  const { active } = (useContext(Context) as Store).Theme;
   const { uniqTows } = (useContext(Context) as Store).FavouriteTown;
   const setFavouriteTown = (town: ICoord) => {
     uniqTows(town, `/region/${query.id}/${query.coords}`);
@@ -47,41 +42,40 @@ const CoordsLayout: FC<CoordsLayoutProps> = ({ coords, coord }) => {
     } as MenuItem;
   }
   const items: MenuItem[] = [
-    // getItem(
-    //   <Button
-    //     // className={styles.header__btn}
-    //     type="primary"
-    //     onClick={() => setFavouriteTown(coord)}>
-    //     Добавить в избранное
-    //   </Button>,
-    //   '1',
-    //   <StarOutlined />,
-    // ),
-    getItem(<Link href="/settings">Настройки</Link>, '2', <StarOutlined />),
+    getItem(
+      <Button type="primary" ghost onClick={() => setFavouriteTown(coord)}>
+        Добавить в избранное
+      </Button>,
+      '1',
+      <StarOutlined />,
+    ),
+    getItem(<Link href="/settings">Настройки</Link>, '2', <SettingOutlined />),
+    getItem(<Link href="/">Главная</Link>, '3', <AppstoreAddOutlined />),
   ];
   return (
-    <div>
-      <Layout style={{ minHeight: '100vh' }}>
+    <div className={active ? theme.lightTheme : theme.darkTheme}>
+      <Layout style={{ minHeight: '100vh', flexDirection: 'row' }}>
         <Sider
-          width={300}
+          width={250}
+          collapsedWidth={60}
           collapsible
           collapsed={collapsed}
           onCollapse={(value) => setCollapsed(value)}>
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+          <Menu theme="dark" defaultSelectedKeys={['2']} items={items} mode="inline" />
         </Sider>
-        {/* <Layout>
-        <MainHeader title="" />
-        <MainContent>
-          <CoordsCard
-            key={coord.coords.geo_object.locality.id}
-            forecasts={coord.coords.forecasts}
-            yesterday={coord.coords.yesterday}
-            geo_object={coord.coords.geo_object}
-            fact={coord.coords.fact}
-          />
-        </MainContent>
-        <CoordsFooter />
-      </Layout> */}
+        <Layout>
+          <MainHeader title={coord.coords.geo_object.locality.name} />
+          <MainContent className={styles.content}>
+            <CoordsCard
+              key={coord.coords.geo_object.locality.id}
+              forecasts={coord.coords.forecasts}
+              yesterday={coord.coords.yesterday}
+              geo_object={coord.coords.geo_object}
+              fact={coord.coords.fact}
+            />
+          </MainContent>
+          <MainFooter />
+        </Layout>
       </Layout>
     </div>
   );

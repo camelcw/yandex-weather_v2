@@ -1,3 +1,4 @@
+import { message } from "antd";
 import { makeAutoObservable } from "mobx";
 /** Store для темы */
 export class ThemeStore {
@@ -14,9 +15,9 @@ export class ThemeStore {
   Toggle = () => {
     this.setTheme(!this.active);
     if (this.active) {
-      alert("White theme");
+      message.info("White theme");
     } else {
-      alert("Dark theme");
+      message.info("Dark theme");
     }
   };
 }
