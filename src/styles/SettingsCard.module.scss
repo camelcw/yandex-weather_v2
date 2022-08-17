@@ -1,22 +1,25 @@
 .settings__card {
-    &:hover {
-        transform: scale(1.02, 1.05);
+  &:first-child {
+    margin-top: 15px;
+  }
+  &:hover {
+    transform: scale(1.02, 1.05);
+  }
+  width: 50%;
+  border: 1px solid #043461f6;
+  &:not(&:last-child) {
+    margin-bottom: 15px;
+  }
+  .settings__cardDescription {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    margin-right: 15px;
+    .settings__cardDescriptionIcon {
+      height: 40px;
+      width: 40px;
+      margin-left: 15px;
     }
-    width: 50%;
-    border: 1px solid #043461f6;
-    &:not(&:last-child) {
-        margin-bottom: 15px;
-    }
-    .settings__cardDescription {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 18px;
-        margin-right: 15px;
-        .settings__cardDescriptionIcon {
-            height: 40px;
-            width: 40px;
-            margin-left: 15px;
-        }
-    }
+  }
 }

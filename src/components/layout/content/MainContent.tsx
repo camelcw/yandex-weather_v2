@@ -3,17 +3,17 @@ import theme from '../../../styles/Theme.module.scss';
 import { Content } from 'antd/lib/layout/layout';
 import { Context } from '../../../pages/_app';
 import { Store } from '../../../store/store';
-import styles from '../../../styles/Content.module.scss';
-
+/** Интерфейс для контента на страницах*/
 interface MainContentProps {
   children: React.ReactNode | React.ReactChild;
+  className: string | undefined;
 }
-
-const MainContent: FC<MainContentProps> = ({ children }) => {
+/** Контент на страницах */
+const MainContent: FC<MainContentProps> = ({ children, className }) => {
   const { active } = (useContext(Context) as Store).Theme;
   return (
-    <div className={active ? theme.lightTheme : theme.darkTheme}>
-      <Content className={styles.content}>{children}</Content>
+    <div className={active ? theme.weather__tenDay_lightTheme : theme.weather__tenDay_darkTheme}>
+      <Content className={className}>{children}</Content>
     </div>
   );
 };

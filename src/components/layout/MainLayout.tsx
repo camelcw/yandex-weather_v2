@@ -1,23 +1,18 @@
 import React, { FC, useContext, useState } from 'react';
 import { Context } from '../../pages/_app';
 import { Store } from '../../store/store';
-import styles from '../../styles/Theme.module.scss';
-import {
-  StarOutlined,
-  SettingOutlined,
-  BarsOutlined,
-  UnorderedListOutlined,
-} from '@ant-design/icons';
-import { Input, MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu } from 'antd';
-import CoordsFooter from './footer/CoordsFooter';
-import RegionHeader from './header/RegionHeader';
+import theme from '../../styles/Theme.module.scss';
+import { SettingOutlined, BarsOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { MenuProps } from 'antd';
+import { Layout, Menu } from 'antd';
 import { IRegion } from '../../models/Region';
 import Link from 'next/link';
 import MainHeader from './header/MainHeader';
 import MainContent from './content/MainContent';
+import MainFooter from './footer/MainFooter';
+import styles from '../../styles/Content.module.scss';
 
-const { Content, Sider } = Layout;
+const { Sider } = Layout;
 
 interface RegionLayoutProps {
   region: IRegion;
@@ -63,7 +58,7 @@ const MainLayout: FC<RegionLayoutProps> = ({ region }) => {
     ),
   ];
   return (
-    <div className={active ? styles.lightTheme : styles.darkTheme}>
+    <div className={active ? theme.lightTheme : theme.darkTheme}>
       <Layout style={{ minHeight: '100vh' }}>
         <Sider
           width={300}
@@ -72,10 +67,10 @@ const MainLayout: FC<RegionLayoutProps> = ({ region }) => {
           onCollapse={(value) => setCollapsed(value)}>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
         </Sider>
-        <Layout>
+        <Layout style={{ minHeight: '100vh' }}>
           <MainHeader title="" />
-          <MainContent>
-            <CoordsFooter />
+          <MainContent className={styles.content}>
+            <MainFooter />
           </MainContent>
         </Layout>
       </Layout>

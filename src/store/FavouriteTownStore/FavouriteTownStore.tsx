@@ -1,6 +1,7 @@
-import { makeAutoObservable } from "mobx";
-import { UrlObject } from "url";
-import { ICoord } from "../../models/Coords";
+import { message } from 'antd';
+import { makeAutoObservable } from 'mobx';
+import { UrlObject } from 'url';
+import { ICoord } from '../../models/Coords';
 /** Store для избранных городов */
 export class FavouriteTownStore {
   towns: ICoord[];
@@ -14,18 +15,15 @@ export class FavouriteTownStore {
 
   setTown = (town: ICoord) => {
     this.towns.push(town);
-    alert(`Ты добавил в избранные`);
+    message.info(`Ты добавил в избранные`);
   };
 
   uniqTows = (town: ICoord, href: string | UrlObject) => {
     let counter = 0;
     if (this.towns.length > 0) {
       this.towns.filter((t) => {
-        if (
-          t.coords.geo_object.locality.name ===
-          town.coords.geo_object.locality.name
-        ) {
-          console.log("check");
+        if (t.coords.geo_object.locality.name === town.coords.geo_object.locality.name) {
+          console.log('check');
           counter++;
         }
       });
@@ -34,7 +32,7 @@ export class FavouriteTownStore {
       this.setHrefs(href);
       this.setTown(town);
     } else {
-      alert("Уже добавлено!");
+      message.info('Уже добавлено!');
       counter = 0;
     }
   };
@@ -55,6 +53,6 @@ export class FavouriteTownStore {
   clearAll = () => {
     this.towns = [];
     this.hrefs = [];
-    alert(`Clear all`);
+    message.info(`Clear all`);
   };
 }
