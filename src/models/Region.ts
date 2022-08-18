@@ -1,4 +1,4 @@
-import { City, ICity } from './City';
+import { City, ICity } from "./City";
 /** Интерфейс для погоды в регионе*/
 export interface Regions {
   name: string;
@@ -7,5 +7,6 @@ export interface Regions {
 }
 /** Интерфейс для погоды в регионах*/
 export interface IRegion {
+  areas: IRegion;
   regions: Regions[];
 }

@@ -1,0 +1,8 @@
+node_modules
+.next
+package-lock.json
+public
+src/types.ts
+src/**/__generated__
+graphql.schema.json
+server.js
