@@ -60,7 +60,7 @@ const ForecastCard: FC<ICoords> = ({
                 <img
                   className={styles.forecast__cardRightSection_img}
                   alt={forecast.parts.morning.icon}
-                  src={` https://yastatic.net/weather/i/icons/funky/dark/${forecast.parts.morning.icon}.svg`}
+                  src={`/assets/icons/${forecast.parts.morning.icon}.svg`}
                 ></img>
                 <div>{fact.condition}</div>
               </div>
@@ -68,7 +68,7 @@ const ForecastCard: FC<ICoords> = ({
                 <img
                   className={styles.forecast__cardRightSection_img}
                   alt={forecast.parts.day_short.icon}
-                  src={` https://yastatic.net/weather/i/icons/funky/dark/${forecast.parts.day_short.icon}.svg`}
+                  src={`/assets/icons/${forecast.parts.day_short.icon}.svg`}
                 ></img>
                 <div>{fact.condition}</div>
               </div>
@@ -76,7 +76,7 @@ const ForecastCard: FC<ICoords> = ({
                 <img
                   className={styles.forecast__cardRightSection_img}
                   alt={forecast.parts.evening.icon}
-                  src={` https://yastatic.net/weather/i/icons/funky/dark/${forecast.parts.evening.icon}.svg`}
+                  src={`/assets/icons/${forecast.parts.evening.icon}.svg`}
                 ></img>
                 <div>{fact.condition}</div>
               </div>
@@ -84,7 +84,7 @@ const ForecastCard: FC<ICoords> = ({
                 <img
                   className={styles.forecast__cardRightSection_img}
                   alt={forecast.parts.night.icon}
-                  src={` https://yastatic.net/weather/i/icons/funky/dark/${forecast.parts.night.icon}.svg`}
+                  src={`/assets/icons/${forecast.parts.night.icon}.svg`}
                 ></img>
                 <div>{fact.condition}</div>
               </div>

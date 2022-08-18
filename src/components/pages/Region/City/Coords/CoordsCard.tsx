@@ -38,10 +38,14 @@ const CoordsCard: FC<ICoords> = ({
           >
             <div className={styles.weather__shortDescription_leftSection}>
               <div>+{fact.temp}</div>
+              {/* <Image
+                src={`/assets/icons/${fact.icon}.svg`}
+                className={styles.weather__shortDescription_leftSectionIcon}
+              /> */}
               <img
                 className={styles.weather__shortDescription_leftSectionIcon}
                 alt={fact?.icon}
-                src={` https://yastatic.net/weather/i/icons/funky/dark/${fact.icon}.svg`}
+                src={`/assets/icons/${fact.icon}.svg`}
               ></img>
             </div>
             <div className={styles.weather__shortDescription_rightSection}>
@@ -68,7 +72,7 @@ const CoordsCard: FC<ICoords> = ({
                       <img
                         className={styles.weather__carouselIcon}
                         alt={hour.icon}
-                        src={` https://yastatic.net/weather/i/icons/funky/dark/${hour.icon}.svg`}
+                        src={`/assets/icons/${hour.icon}.svg`}
                       ></img>
                     </div>
                   </div>
@@ -91,7 +95,7 @@ const CoordsCard: FC<ICoords> = ({
                 <img
                   className={styles.weather__tenDay_icon}
                   alt={forecast.parts.day_short.icon}
-                  src={` https://yastatic.net/weather/i/icons/funky/dark/${forecast.parts.day_short.icon}.svg`}
+                  src={`/assets/icons/${forecast.parts.day_short.icon}.svg`}
                 ></img>
                 <p>+{forecast.parts.day_short.soil_temp}</p>
                 <p>+{forecast.parts.day_short.temp_min}</p>

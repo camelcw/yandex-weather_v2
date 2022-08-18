@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import React, { FC, useContext } from 'react';
-import { ICoord } from '../../../models/Coords';
-import { Context } from '../../../pages/_app';
-import { Store } from '../../../store/store';
-import styles from '../../../styles/SettingsCard.module.scss';
+import Link from "next/link";
+import React, { FC, useContext } from "react";
+import { ICoord } from "../../../models/Coords";
+import { Context } from "../../../pages/_app";
+import { Store } from "../../../store/store";
+import styles from "../../../styles/SettingsCard.module.scss";
 
 interface SettingsCardProps {
   town: ICoord;
@@ -21,7 +21,8 @@ const SettingsCard: FC<SettingsCardProps> = ({ town, index }) => {
             <img
               className={styles.settings__cardDescriptionIcon}
               alt={town.coords.fact.icon}
-              src={` https://yastatic.net/weather/i/icons/funky/dark/${town.coords.fact.icon}.svg`}></img>
+              src={`/assets/icons/${town.coords.fact.icon}.svg`}
+            ></img>
             <div>+{town.coords.fact.soil_temp}</div>
             <div>{town.coords.geo_object.locality.name}</div>
           </a>
