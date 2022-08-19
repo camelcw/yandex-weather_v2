@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import { Context } from "../../pages/_app";
 import { Store } from "../../store/store";
 import theme from "../../styles/Theme.module.scss";
@@ -9,18 +9,17 @@ import {
 } from "@ant-design/icons";
 import { Input, MenuProps } from "antd";
 import { Layout, Menu } from "antd";
-import { IRegion, Regions } from "../../models/Region";
+import { Regions } from "../../models/Region";
 import Link from "next/link";
 import MainHeader from "./header/MainHeader";
 import MainContent from "./content/MainContent";
 import MainFooter from "./footer/MainFooter";
 import styles from "../../styles/Content.module.scss";
-import { City } from "../../models/City";
 
 const { Sider } = Layout;
 
 interface RegionLayoutProps {
-  region: IRegion;
+  defaultRegions: Regions[];
 }
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -39,66 +38,107 @@ function getItem(
   } as MenuItem;
 }
 
-const MainLayout: FC<RegionLayoutProps> = ({ region }) => {
+const MainLayout: FC<RegionLayoutProps> = ({ defaultRegions = [] }) => {
   const { active } = (useContext(Context) as Store).Theme;
   const [collapsed, setCollapsed] = useState(false);
   const [searchFiledRegion, setSearchFieldRegion] = useState<string>("");
   const [searchFiledCity, setSearchFieldCity] = useState<string>("");
 
-  const filteredRegions = region.regions.filter((reg) =>
-    reg.name.toLowerCase().includes(searchFiledRegion.toLowerCase()),
-  );
-  // const filteredCities: City[] = filteredRegions.map((reg) =>
-  //   reg.areas?.filter((city) =>
-  //     city.name.toLowerCase().includes(searchFiledCity.toLowerCase()),
-  //   ),
-  // );
   const handleChangeRegion = (event: any) => {
     setSearchFieldRegion(event.target.value);
   };
+
   const handleChangeCities = (event: any) => {
     setSearchFieldCity(event.target.value);
   };
 
-  const items: MenuItem[] = [
-    getItem(<Link href="/settings">Настройки</Link>, "1", <SettingOutlined />),
-    getItem("Регионы", "sub1", <BarsOutlined />, [
+  const getMenuItems = (regionFilter = "", cityFilter = "") => {
+    let regions = [...defaultRegions];
+
+    if (regionFilter.length > 0) {
+      regions = regions.filter((region) =>
+        region.name.toLowerCase().includes(regionFilter.toLowerCase()),
+      );
+    }
+
+    const regionsAndCitiesTree = regions.map((region) => {
+      let cities = [...(region.areas ?? [])];
+
+      if (cityFilter.length > 0) {
+        cities = cities.filter((city) =>
+          city.name.toLowerCase().includes(cityFilter.toLowerCase()),
+        );
+      }
+
+      return {
+        id: region.id,
+        name: region.name,
+        cities: cities,
+      };
+    });
+
+    return [
       getItem(
-        "Search",
-        "2342",
-        <Input
-          placeholder="Поиск..."
-          onChange={handleChangeRegion}
-          className={
-            active ? styles.lightTheme : styles.region__search_darkTheme
-          }
-        />,
-        filteredRegions.slice(0, 10).map((reg) =>
-          getItem(`${reg.name}`, `${reg.id}`, <UnorderedListOutlined />, [
-            getItem(
-              "Поиск...",
-              "123124",
-              <Input
-                placeholder="Поиск..."
-                onChange={handleChangeCities}
-                className={
-                  active ? styles.lightTheme : styles.region__search_darkTheme
-                }
-              />,
-              reg.areas?.map((city) =>
-                getItem(
-                  <Link href={`/region/${reg.id}/${city?.name}`}>
-                    {city?.name}
-                  </Link>,
-                  `${city?.id}`,
-                ),
-              ),
-            ),
-          ]),
-        ),
+        <Link href="/settings">Настройки</Link>,
+        "1",
+        <SettingOutlined />,
       ),
-    ]),
-  ];
+      getItem("Регионы", "2", <BarsOutlined />, [
+        getItem(
+          <Input
+            placeholder="Поиск..."
+            onChange={handleChangeRegion}
+            className={
+              active ? styles.lightTheme : styles.region__search_darkTheme
+            }
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          />,
+          "2-0",
+          <></>,
+        ),
+        ...regionsAndCitiesTree.map((region) =>
+          getItem(
+            `${region.name}`,
+            `2-${region.id}`,
+            <UnorderedListOutlined />,
+            [
+              getItem(
+                <Input
+                  placeholder="Поиск..."
+                  onChange={handleChangeCities}
+                  className={
+                    active ? styles.lightTheme : styles.region__search_darkTheme
+                  }
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                />,
+                `3-${region.id}-1`,
+                <></>,
+              ),
+              ...(region.cities?.map((city) =>
+                getItem(
+                  <Link href={`/region/${region.id}/${city.name}`}>
+                    {city.name}
+                  </Link>,
+                  `3-${region.id}-${city.id}`,
+                ),
+              ) ?? []),
+            ],
+          ),
+        ),
+      ]),
+    ];
+  };
+
+  const [items, setItems] = useState<MenuItem[]>(getMenuItems());
+
+  useEffect(() => {
+    setItems(getMenuItems(searchFiledRegion, searchFiledCity));
+  }, [searchFiledRegion, searchFiledCity]);
+
   return (
     <div className={active ? theme.lightTheme : theme.darkTheme}>
       <Layout style={{ minHeight: "100vh" }}>
@@ -111,8 +151,9 @@ const MainLayout: FC<RegionLayoutProps> = ({ region }) => {
           <Menu
             theme="dark"
             defaultSelectedKeys={["1"]}
-            mode="inline"
+            mode="vertical"
             items={items}
+            triggerSubMenuAction={"click"}
           />
         </Sider>
         <Layout style={{ minHeight: "100vh" }}>
