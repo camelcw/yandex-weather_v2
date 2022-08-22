@@ -14,8 +14,7 @@ import Link from "next/link";
 import MainHeader from "./header/MainHeader";
 import MainContent from "./content/MainContent";
 import MainFooter from "./footer/MainFooter";
-import styles from "../../styles/Content.module.scss";
-
+import styles from "../layout/content/Content.module.scss";
 const { Sider } = Layout;
 
 interface RegionLayoutProps {

@@ -3,7 +3,7 @@ import React, { FC, useContext } from "react";
 import { ICoord } from "../../../models/Coords";
 import { Context } from "../../../pages/_app";
 import { Store } from "../../../store/store";
-import styles from "../../../styles/SettingsCard.module.scss";
+import styles from "./SettingsCard.module.scss";
 
 interface SettingsCardProps {
   town: ICoord;
