@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 import { IRegion } from "../../models/Region";
 /** Store для DefaultRegion*/
 export class DefaultRegionStore {
@@ -8,7 +8,10 @@ export class DefaultRegionStore {
       defaultRegions: [],
     };
 
-    makeAutoObservable(this);
+    makeObservable(this, {
+      defaultRegions: observable,
+      setDefaultRegion: action,
+    });
   }
 
   setDefaultRegion = (defaultRegions: IRegion) => {

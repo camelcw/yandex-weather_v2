@@ -161,6 +161,7 @@ const CoordsLayout: FC<CoordsLayoutProps> = ({
             defaultSelectedKeys={["2"]}
             items={items}
             mode="vertical"
+            triggerSubMenuAction={"click"}
           />
         </Sider>
         <Layout>
