@@ -38,10 +38,6 @@ const CoordsCard: FC<ICoords> = ({
           >
             <div className={styles.weather__shortDescription_leftSection}>
               <div>+{fact.temp}</div>
-              {/* <Image
-                src={`/assets/icons/${fact.icon}.svg`}
-                className={styles.weather__shortDescription_leftSectionIcon}
-              /> */}
               <img
                 className={styles.weather__shortDescription_leftSectionIcon}
                 alt={fact?.icon}

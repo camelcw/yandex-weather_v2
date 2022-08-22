@@ -81,9 +81,6 @@ const SettingsLayout: FC<RegionLayoutProps> = ({ defaultRegions = [] }) => {
           <Input
             placeholder="Поиск..."
             onChange={handleChangeRegion}
-            className={
-              active ? theme.lightTheme : theme.region__search_darkTheme
-            }
             onClick={(e) => {
               e.stopPropagation();
             }}
@@ -101,9 +98,6 @@ const SettingsLayout: FC<RegionLayoutProps> = ({ defaultRegions = [] }) => {
                 <Input
                   placeholder="Поиск..."
                   onChange={handleChangeCities}
-                  className={
-                    active ? theme.lightTheme : theme.region__search_darkTheme
-                  }
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
@@ -147,6 +141,7 @@ const SettingsLayout: FC<RegionLayoutProps> = ({ defaultRegions = [] }) => {
             defaultSelectedKeys={["1"]}
             items={items}
             mode="vertical"
+            triggerSubMenuAction={"click"}
           />
         </Sider>
         <Layout>

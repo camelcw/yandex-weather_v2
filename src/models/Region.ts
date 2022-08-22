@@ -1,4 +1,4 @@
-import { City, ICity } from "./City";
+import { City } from "./City";
 /** Интерфейс для погоды в регионе*/
 export interface Regions {
   name: string;

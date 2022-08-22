@@ -1,10 +1,14 @@
-import { makeAutoObservable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 /** Store при загрузке */
 export class LoadingStore {
   isLoading: boolean;
   constructor() {
     this.isLoading = true;
-    makeAutoObservable(this);
+    makeObservable(this, {
+      isLoading: observable,
+      setIsLoading: action,
+      Toggle: action,
+    });
   }
 
   setIsLoading(isLoading: boolean) {

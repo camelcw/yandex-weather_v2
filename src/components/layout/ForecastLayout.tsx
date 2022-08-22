@@ -172,6 +172,7 @@ const ForecastLayout: FC<ForecastLayoutProps> = ({
             defaultSelectedKeys={["2"]}
             items={items}
             mode="vertical"
+            triggerSubMenuAction={"click"}
           />
         </Sider>
         <Layout>

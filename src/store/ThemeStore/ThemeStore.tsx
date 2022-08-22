@@ -1,11 +1,16 @@
 import { message } from "antd";
-import { makeAutoObservable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 /** Store для темы */
 export class ThemeStore {
   active: boolean;
   constructor() {
     this.active = true;
-    makeAutoObservable(this);
+    // makeAutoObservable(this);
+    makeObservable(this, {
+      active: observable,
+      setTheme: action,
+      Toggle: action,
+    });
   }
 
   setTheme(active: boolean) {
