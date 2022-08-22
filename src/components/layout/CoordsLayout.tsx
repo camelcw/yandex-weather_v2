@@ -10,7 +10,7 @@ import CoordsCard from "../pages/Region/City/Coords/CoordsCard";
 import MainContent from "./content/MainContent";
 import MainHeader from "./header/MainHeader";
 import theme from "../../styles/Theme.module.scss";
-import styles from "../../styles/Content.module.scss";
+import styles from "../layout/content/Content.module.scss";
 import MainFooter from "./footer/MainFooter";
 import { Regions } from "../../models/Region";
 import {

@@ -3,7 +3,7 @@ import React, { FC, useContext } from "react";
 import { ICoords } from "../../../../../../models/Coords";
 import { Context } from "../../../../../../pages/_app";
 import { Store } from "../../../../../../store/store";
-import styles from "../../../../../../styles/ForecastCard.module.scss";
+import styles from "./ForecastCard.module.scss";
 import theme from "../../../../../../styles/Theme.module.scss";
 import moment from "moment";
 

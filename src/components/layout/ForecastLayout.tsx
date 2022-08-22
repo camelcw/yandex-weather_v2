@@ -12,7 +12,7 @@ import {
 import Sider from "antd/lib/layout/Sider";
 import MainHeader from "./header/MainHeader";
 import MainContent from "./content/MainContent";
-import styles from "../../styles/Content.module.scss";
+import styles from "../layout/content/Content.module.scss";
 import { Regions } from "../../models/Region";
 import { Context } from "../../pages/_app";
 import { Store } from "../../store/store";
