@@ -7,6 +7,6 @@ export interface Regions {
 }
 /** Интерфейс для погоды в регионах*/
 export interface IRegion {
-  areas: IRegion;
-  regions: Regions[];
+  areas?: IRegion;
+  defaultRegions: Regions[];
 }

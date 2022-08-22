@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IForecast } from "../../../../../models/Coords";
 import { observer } from "mobx-react-lite";
 import ForecastLayout from "../../../../../components/layout/ForecastLayout";
@@ -8,11 +8,14 @@ import {
   TOWN_URL,
   X_Yandex_API_Key,
 } from "../../../../../utils/constants";
+import { Context } from "../../../../_app";
+import { Store } from "../../../../../store/store";
 /** Страница подробный погоды */
 const index = (forecast: IForecast) => {
+  const { defaultRegions } = (useContext(Context) as Store).DefaultRegions;
   return (
     <div>
-      <ForecastLayout forecast={forecast} />
+      <ForecastLayout defaultRegions={defaultRegions.defaultRegions} forecast={forecast} />
     </div>
   );
 };

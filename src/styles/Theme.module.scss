@@ -50,3 +50,11 @@
   @extend %darkTheme;
   color: white;
 }
+
+.settings__layout_darkTheme {
+  @extend %darkTheme;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 5px;
+}
