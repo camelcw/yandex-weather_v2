@@ -1,0 +1,14 @@
+.layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+.layout__btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #e2e2e2;
+  padding: 5px 5px;
+}

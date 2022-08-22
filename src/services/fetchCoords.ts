@@ -16,13 +16,13 @@ export async function fetchTown(url: string, params: AxiosRequestConfig) {
 }
 
 export async function fetchCoords(
-  urlTown: string,
+  townUrl: string,
   paramsTown: AxiosRequestConfig,
-  urlCoord: string,
+  coordUrl: string,
   headers: string,
 ) {
   try {
-    const town = await fetchTown(urlTown, paramsTown);
+    const town = await fetchTown(townUrl, paramsTown);
     const valuesArray: Towns[] = Object.values(town);
     let townObject: Towns = {
       geo_center: {
@@ -37,7 +37,7 @@ export async function fetchCoords(
       townObject = tw;
     });
 
-    const response = await axios.get(urlCoord, {
+    const response = await axios.get(coordUrl, {
       params: {
         lon: townObject.geo_center.lon,
         lat: townObject.geo_center.lat,
