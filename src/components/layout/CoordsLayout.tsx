@@ -18,6 +18,7 @@ import {
   BarsOutlined,
   UnorderedListOutlined,
 } from "@ant-design/icons";
+import { getItem, MenuItem } from "../../services/getMenuItems";
 /** Интерфейс для  CoordsLayout*/
 interface CoordsLayoutProps {
   coord: ICoord;
@@ -45,21 +46,7 @@ const CoordsLayout: FC<CoordsLayoutProps> = ({
   const handleChangeCities = (event: any) => {
     setSearchFieldCity(event.target.value);
   };
-  type MenuItem = Required<MenuProps>["items"][number];
 
-  function getItem(
-    label: React.ReactNode,
-    key?: React.Key,
-    icon?: React.ReactNode,
-    children?: MenuItem[],
-  ): MenuItem {
-    return {
-      key,
-      icon,
-      children,
-      label,
-    } as MenuItem;
-  }
   const getMenuItems = (regionFilter = "", cityFilter = "") => {
     let regions = [...defaultRegions];
 

@@ -1,4 +1,4 @@
-import { Button, Input, Layout, Menu, MenuProps } from "antd";
+import { Button, Input, Layout, Menu } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC, useContext, useEffect, useState } from "react";
@@ -16,6 +16,7 @@ import styles from "../layout/content/Content.module.scss";
 import { Regions } from "../../models/Region";
 import { Context } from "../../pages/_app";
 import { Store } from "../../store/store";
+import { getItem, MenuItem } from "../../services/getMenuItems";
 
 /** Интерфейс для  ForecastLayout*/
 interface ForecastLayoutProps {
@@ -23,21 +24,6 @@ interface ForecastLayoutProps {
   defaultRegions: Regions[];
 }
 
-type MenuItem = Required<MenuProps>["items"][number];
-
-function getItem(
-  label: React.ReactNode,
-  key?: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  } as MenuItem;
-}
 /** Страница подробной погоды*/
 const ForecastLayout: FC<ForecastLayoutProps> = ({
   forecast,
@@ -56,21 +42,7 @@ const ForecastLayout: FC<ForecastLayoutProps> = ({
   const handleChangeCities = (event: any) => {
     setSearchFieldCity(event.target.value);
   };
-  type MenuItem = Required<MenuProps>["items"][number];
 
-  function getItem(
-    label: React.ReactNode,
-    key?: React.Key,
-    icon?: React.ReactNode,
-    children?: MenuItem[],
-  ): MenuItem {
-    return {
-      key,
-      icon,
-      children,
-      label,
-    } as MenuItem;
-  }
   const getMenuItems = (regionFilter = "", cityFilter = "") => {
     let regions = [...defaultRegions];
 

@@ -5,7 +5,6 @@ export class ThemeStore {
   active: boolean;
   constructor() {
     this.active = true;
-    // makeAutoObservable(this);
     makeObservable(this, {
       active: observable,
       setTheme: action,

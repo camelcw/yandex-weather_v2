@@ -7,7 +7,7 @@ import {
   BarsOutlined,
   UnorderedListOutlined,
 } from "@ant-design/icons";
-import { Input, MenuProps } from "antd";
+import { Input } from "antd";
 import { Layout, Menu } from "antd";
 import { Regions } from "../../models/Region";
 import Link from "next/link";
@@ -15,28 +15,14 @@ import MainHeader from "./header/MainHeader";
 import MainContent from "./content/MainContent";
 import MainFooter from "./footer/MainFooter";
 import styles from "../layout/content/Content.module.scss";
+import { getItem, MenuItem } from "../../services/getMenuItems";
 const { Sider } = Layout;
 
 interface RegionLayoutProps {
   defaultRegions: Regions[];
 }
 
-type MenuItem = Required<MenuProps>["items"][number];
-
-function getItem(
-  label: React.ReactNode,
-  key?: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  } as MenuItem;
-}
-
+/** Главная страница */
 const MainLayout: FC<RegionLayoutProps> = ({ defaultRegions = [] }) => {
   const { active } = (useContext(Context) as Store).Theme;
   const [collapsed, setCollapsed] = useState(false);

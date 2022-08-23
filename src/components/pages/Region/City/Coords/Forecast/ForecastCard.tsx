@@ -1,13 +1,13 @@
 import { Card } from "antd";
 import React, { FC, useContext } from "react";
-import { ICoords } from "../../../../../../models/Coords";
+import { Coords } from "../../../../../../models/Coords";
 import { Context } from "../../../../../../pages/_app";
 import { Store } from "../../../../../../store/store";
 import styles from "./ForecastCard.module.scss";
 import theme from "../../../../../../styles/Theme.module.scss";
 import moment from "moment";
 
-const ForecastCard: FC<ICoords> = ({
+const ForecastCard: FC<Coords> = ({
   forecasts,
   fact,
   yesterday,

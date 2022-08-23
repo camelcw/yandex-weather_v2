@@ -5,7 +5,7 @@ import { ICoord } from "../../models/Coords";
 /** Store для избранных городов */
 export class FavouriteTownStore {
   towns: ICoord[];
-  hrefs: any[];
+  hrefs: (UrlObject | string)[];
   constructor() {
     this.hrefs = [];
     this.towns = [];
