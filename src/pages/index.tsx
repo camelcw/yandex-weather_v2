@@ -23,7 +23,6 @@ export default index;
 /** Получение данных о регионах */
 export async function getStaticProps(context: any) {
   const defaultRegions = await fetchRegion(REGION_URL);
-
   return {
     props: { defaultRegions: defaultRegions },
   };

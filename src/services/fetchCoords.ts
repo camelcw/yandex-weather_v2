@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { Towns } from "../models/Town";
-
+/** Вспомогательная функция для запроса на получение городов */
 export async function fetchTown(url: string, params: AxiosRequestConfig) {
   try {
     const response = await axios.get(url, {
@@ -14,7 +14,7 @@ export async function fetchTown(url: string, params: AxiosRequestConfig) {
     console.log("Error");
   }
 }
-
+/** Функция для запроса на получение погоды в городе по координатам  */
 export async function fetchCoords(
   townUrl: string,
   paramsTown: AxiosRequestConfig,
@@ -23,7 +23,7 @@ export async function fetchCoords(
 ) {
   try {
     const town = await fetchTown(townUrl, paramsTown);
-    const valuesArray: Towns[] = Object.values(town);
+    const townArray: Towns[] = Object.values(town);
     let townObject: Towns = {
       geo_center: {
         lat: "0",
@@ -33,8 +33,8 @@ export async function fetchCoords(
       area: 0,
     };
 
-    valuesArray.map((tw) => {
-      townObject = tw;
+    townArray.map((town) => {
+      townObject = town;
     });
 
     const response = await axios.get(coordUrl, {

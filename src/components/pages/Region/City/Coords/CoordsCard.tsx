@@ -2,14 +2,14 @@ import { Card, Carousel } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC, useContext } from "react";
-import { ICoords } from "../../../../../models/Coords";
+import { Coords } from "../../../../../models/Coords";
 import { Context } from "../../../../../pages/_app";
 import { Store } from "../../../../../store/store";
 import styles from "./CoordsCard.module.scss";
 import theme from "../../../../../styles/Theme.module.scss";
 import moment from "moment";
 
-const CoordsCard: FC<ICoords> = ({
+const CoordsCard: FC<Coords> = ({
   fact,
   forecasts,
   yesterday,

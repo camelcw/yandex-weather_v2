@@ -1,4 +1,4 @@
-import { Button, Input, Layout, Menu, MenuProps } from "antd";
+import { Button, Input, Layout, Menu } from "antd";
 import React, { FC, useContext, useEffect, useState } from "react";
 import { Context } from "../../pages/_app";
 import { Store } from "../../store/store";
@@ -13,22 +13,8 @@ import MainContent from "./content/MainContent";
 import { observer } from "mobx-react-lite";
 import { Regions } from "../../models/Region";
 import { BarsOutlined, UnorderedListOutlined } from "@ant-design/icons";
+import { getItem, MenuItem } from "../../services/getMenuItems";
 
-type MenuItem = Required<MenuProps>["items"][number];
-
-function getItem(
-  label: React.ReactNode,
-  key?: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  } as MenuItem;
-}
 interface RegionLayoutProps {
   defaultRegions: Regions[];
 }
