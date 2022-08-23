@@ -1,1 +1,1 @@
-# yandex-weather_v2
+# yandex-weather

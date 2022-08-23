@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React, { lazy, Suspense, useContext } from "react";
 import { ICoord } from "../../../../models/Coords";
 import { observer } from "mobx-react-lite";
-import CoordsLayout from "../../../../components/layout/CoordsLayout";
 import { fetchCoords } from "../../../../services/fetchCoords";
 import {
   COORD_URL,
@@ -10,17 +9,23 @@ import {
 } from "../../../../utils/constants";
 import { Context } from "../../../_app";
 import { Store } from "../../../../store/store";
+import MyLoader from "../../../../components/layout/loader/MyLoader";
 
+const CoordsLayout = lazy(
+  () => import("../../../../components/layout/CoordsLayout"),
+);
 /** Получение подробный погоды в городе */
 const index = (coord: ICoord) => {
   const { defaultRegions } = (useContext(Context) as Store).DefaultRegions;
 
   return (
     <div>
-      <CoordsLayout
-        defaultRegions={defaultRegions.defaultRegions}
-        coord={coord}
-      />
+      <Suspense fallback={<MyLoader />}>
+        <CoordsLayout
+          defaultRegions={defaultRegions.defaultRegions}
+          coord={coord}
+        />
+      </Suspense>
     </div>
   );
 };
