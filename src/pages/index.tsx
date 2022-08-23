@@ -1,12 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, lazy, Suspense } from "react";
 import "../../node_modules/antd/dist/antd.css";
 import { IRegion } from "../models/Region";
 import { observer } from "mobx-react-lite";
-import MainLayout from "../components/layout/MainLayout";
 import { fetchRegion } from "../services/fetchRegion";
 import { REGION_URL } from "../utils/constants";
 import { Context } from "./_app";
 import { Store } from "../store/store";
+import MyLoader from "../components/layout/loader/MyLoader";
+
+const MainLayout = lazy(() => import("../components/layout/MainLayout"));
 
 /** Главная страница */
 const index = observer((defaultRegions: IRegion) => {
@@ -14,7 +16,9 @@ const index = observer((defaultRegions: IRegion) => {
   setDefaultRegion(defaultRegions);
   return (
     <div>
-      <MainLayout defaultRegions={defaultRegions.defaultRegions} />
+      <Suspense fallback={<MyLoader />}>
+        <MainLayout defaultRegions={defaultRegions.defaultRegions} />
+      </Suspense>
     </div>
   );
 });
